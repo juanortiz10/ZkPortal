@@ -14,16 +14,25 @@ import java.util.List;
  * @author tulio_93
  */
 public class Receta {
-    private Timestamp date;
+    private Timestamp fecha;
+    private String evento;
     private List<Detalle> detalles = new ArrayList<>();
     private String notas;
 
-    public Timestamp getDate() {
-        return date;
+    public Timestamp getFecha() {
+        return fecha;
     }
 
-    public void setDate(Timestamp date) {
-        this.date = date;
+    public void setFecha(Timestamp fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getEvento() {
+        return evento;
+    }
+
+    public void setEvento(String evento) {
+        this.evento = evento;
     }
 
     public List<Detalle> getDetalles() {
@@ -41,6 +50,5 @@ public class Receta {
     public void setNotas(String notas) {
         this.notas = notas;
     }
-    
     
 }

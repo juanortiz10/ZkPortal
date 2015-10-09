@@ -12,17 +12,18 @@ import java.sql.Timestamp;
  * @author tulio_93
  */
 public class Event {
-    private int id;
+    private String id;
     private Timestamp fecha;
+    private Medic medico;
     private String especialidad;
     private String tipo;
     private String motivo;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -34,6 +35,14 @@ public class Event {
         this.fecha = fecha;
     }
 
+    public Medic getMedico() {
+        return medico;
+    }
+
+    public void setMedico(Medic medico) {
+        this.medico = medico;
+    }
+    
     public String getEspecialidad() {
         return especialidad;
     }

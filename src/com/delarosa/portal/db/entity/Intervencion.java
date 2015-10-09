@@ -12,11 +12,19 @@ import java.sql.Timestamp;
  * @author tulio_93
  */
 public class Intervencion {
-//    private List<>
+    private String evento;
     private Timestamp fecha;
     private String codigo;
     private String nombre;
 
+    public String getEvento() {
+        return evento;
+    }
+
+    public void setEvento(String evento) {
+        this.evento = evento;
+    }
+    
     public Timestamp getFecha() {
         return fecha;
     }
