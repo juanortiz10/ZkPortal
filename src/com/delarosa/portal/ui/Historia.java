@@ -9,7 +9,7 @@ import org.zkoss.zul.Toolbarbutton;
  * @author jvillegas
  */
 public class Historia extends Window {
-
+//textbox
     private final Textbox clinica;
     private final Textbox personal;
     private final Textbox familiar;

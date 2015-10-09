@@ -191,6 +191,7 @@ public final class Main extends Window {
                     Notification.showInfo(navitem.getLabel());
                     break;
                 case "h":
+                    //clase historia
                     open(new Historia());
                     break;
             }
