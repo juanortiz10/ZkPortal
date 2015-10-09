@@ -12,31 +12,34 @@ import java.sql.Timestamp;
  * @author tulio_93
  */
 public class Intervencion {
-    private Timestamp date;
-    private String code;
-    private String name;
+//    private List<>
+    private Timestamp fecha;
+    private String codigo;
+    private String nombre;
 
-    public Timestamp getDate() {
-        return date;
+    public Timestamp getFecha() {
+        return fecha;
     }
 
-    public void setDate(Timestamp date) {
-        this.date = date;
+    public void setFecha(Timestamp fecha) {
+        this.fecha = fecha;
     }
 
-    public String getCode() {
-        return code;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
+
+   
 }

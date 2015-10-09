@@ -13,10 +13,10 @@ import java.sql.Timestamp;
  */
 public class Event {
     private int id;
-    private Timestamp date;
-    private String spec;
-    private String type;
-    private String desc;
+    private Timestamp fecha;
+    private String especialidad;
+    private String tipo;
+    private String motivo;
 
     public int getId() {
         return id;
@@ -26,35 +26,37 @@ public class Event {
         this.id = id;
     }
 
-    public Timestamp getDate() {
-        return date;
+    public Timestamp getFecha() {
+        return fecha;
     }
 
-    public void setDate(Timestamp date) {
-        this.date = date;
+    public void setFecha(Timestamp fecha) {
+        this.fecha = fecha;
     }
 
-    public String getSpec() {
-        return spec;
+    public String getEspecialidad() {
+        return especialidad;
     }
 
-    public void setSpec(String spec) {
-        this.spec = spec;
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
     }
 
-    public String getType() {
-        return type;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getMotivo() {
+        return motivo;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }   
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
+
+    
 }

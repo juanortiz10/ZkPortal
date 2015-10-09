@@ -10,42 +10,42 @@ package com.delarosa.portal.db.entity;
  * @author tulio_93
  */
 public class Detalle {
-    private String code;
-    private String name;
-    private String dose;
-    private String indic;
+    private String codigo;
+    private String nombre;
+    private String dosis;
+    private String indicacion;
     private String via;
 
-    public String getCode() {
-        return code;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getDose() {
-        return dose;
+    public String getDosis() {
+        return dosis;
     }
 
-    public void setDose(String dose) {
-        this.dose = dose;
+    public void setDosis(String dosis) {
+        this.dosis = dosis;
     }
 
-    public String getIndic() {
-        return indic;
+    public String getIndicacion() {
+        return indicacion;
     }
 
-    public void setIndic(String indic) {
-        this.indic = indic;
+    public void setIndicacion(String indicacion) {
+        this.indicacion = indicacion;
     }
 
     public String getVia() {
