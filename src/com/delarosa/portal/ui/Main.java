@@ -9,6 +9,8 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.event.SwipeEvent;
+import org.zkoss.zkmax.zul.Navbar;
+import org.zkoss.zkmax.zul.Navitem;
 import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Center;
 import org.zkoss.zul.North;
@@ -41,6 +43,7 @@ public class Main extends Window {
             west.setWidth("200px");
             west.setTitle(" ");
             west.setCollapsible(true);
+            createMenu(west);
 
             EventListener<SwipeEvent> swipe = (SwipeEvent t) -> {
                 if (null != t.getSwipeDirection()) {
@@ -80,6 +83,71 @@ public class Main extends Window {
                 west.setOpen(false);
             }
         }
+    }
+
+    public void createMenu(West west) {
+        Navbar navbar = new Navbar("vertical");
+
+        Navitem home = new Navitem();
+        home.setLabel("Inicio");
+        home.setIconSclass("z-icon-home");
+        home.setWidth("100%");
+        home.setSelected(true);
+        
+        Navitem citas = new Navitem();
+        citas.setLabel("Citas");
+        citas.setIconSclass("z-icon-calendar");
+        citas.setWidth("100%");
+        
+        Navitem recetas = new Navitem();
+        recetas.setLabel("Recetas");
+        recetas.setIconSclass("z-icon-pencil-square-o");
+        recetas.setWidth("100%");
+        
+        Navitem alergias = new Navitem();
+        alergias.setLabel("Alergias");
+        alergias.setIconSclass("z-icon-exclamation");
+        alergias.setWidth("100%");
+        
+        Navitem diagnosticos = new Navitem();
+        diagnosticos.setLabel("Diagnósticos");
+        diagnosticos.setIconSclass("z-icon-check-circle-o");
+        diagnosticos.setWidth("100%");
+        
+        Navitem intervenciones = new Navitem();
+        intervenciones.setLabel("Intervenciones");
+        intervenciones.setIconSclass("z-icon-hospital-o");
+        intervenciones.setWidth("100%");
+        
+        Navitem medicamentos = new Navitem();
+        medicamentos.setLabel("Medicamentos");
+        medicamentos.setIconSclass("z-icon-medkit");
+        medicamentos.setWidth("100%");
+        
+        Navitem signos = new Navitem();
+        signos.setLabel("Signos");
+        signos.setIconSclass("z-icon-heartbeat");
+        signos.setWidth("100%");
+        
+        Navitem historia = new Navitem();
+        historia.setLabel("Historia");
+        historia.setIconSclass("z-icon-book");
+        historia.setWidth("100%");
+
+        navbar.appendChild(home);
+        navbar.appendChild(citas);
+        navbar.appendChild(recetas);
+        navbar.appendChild(alergias);
+        navbar.appendChild(diagnosticos);
+        navbar.appendChild(intervenciones);
+        navbar.appendChild(medicamentos);
+        navbar.appendChild(signos);
+        navbar.appendChild(historia);
+
+        west.appendChild(navbar);
+
+        navbar.setWidth("100%");
+        navbar.setHeight("100%");
     }
 
     public void onCreate() {
