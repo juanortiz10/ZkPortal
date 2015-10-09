@@ -5,6 +5,7 @@ import com.delarosa.portal.zk.Notification;
 import com.delarosa.portal.zk.ZKUtils;
 import org.zkoss.essentials.services.AuthenticationService;
 import org.zkoss.essentials.services.UserCredential;
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -86,6 +87,11 @@ public final class Main extends Window {
                 west.setOpen(false);
             }
         }
+    }
+
+    public void open(Component component) {
+        center.getChildren().clear();
+        center.appendChild(component);
     }
 
     public void createMenu(West west) {
@@ -185,7 +191,7 @@ public final class Main extends Window {
                     Notification.showInfo(navitem.getLabel());
                     break;
                 case "h":
-                    Notification.showInfo(navitem.getLabel());
+                    open(new Historia());
                     break;
             }
         };
