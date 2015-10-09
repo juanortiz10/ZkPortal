@@ -1,6 +1,7 @@
 package com.delarosa.portal.ui;
 
 import com.delarosa.portal.authentication.MyAuthenticationService;
+import com.delarosa.portal.zk.Notification;
 import com.delarosa.portal.zk.ZKUtils;
 import org.zkoss.essentials.services.AuthenticationService;
 import org.zkoss.essentials.services.UserCredential;
@@ -8,6 +9,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zk.ui.event.SelectEvent;
 import org.zkoss.zk.ui.event.SwipeEvent;
 import org.zkoss.zkmax.zul.Navbar;
 import org.zkoss.zkmax.zul.Navitem;
@@ -21,7 +23,7 @@ import org.zkoss.zul.Window;
  *
  * @author odelarosa
  */
-public class Main extends Window {
+public final class Main extends Window {
 
     private final Borderlayout borderlayout = new Borderlayout();
     private final Center center = new Center();
@@ -43,6 +45,7 @@ public class Main extends Window {
             west.setWidth("200px");
             west.setTitle(" ");
             west.setCollapsible(true);
+
             createMenu(west);
 
             EventListener<SwipeEvent> swipe = (SwipeEvent t) -> {
@@ -90,47 +93,56 @@ public class Main extends Window {
 
         Navitem home = new Navitem();
         home.setLabel("Inicio");
+        home.setId("k");
         home.setIconSclass("z-icon-home");
         home.setWidth("100%");
         home.setSelected(true);
-        
+
         Navitem citas = new Navitem();
         citas.setLabel("Citas");
+        citas.setId("c");
         citas.setIconSclass("z-icon-calendar");
         citas.setWidth("100%");
-        
+
         Navitem recetas = new Navitem();
         recetas.setLabel("Recetas");
+        recetas.setId("r");
         recetas.setIconSclass("z-icon-pencil-square-o");
         recetas.setWidth("100%");
-        
+
         Navitem alergias = new Navitem();
         alergias.setLabel("Alergias");
+        alergias.setId("a");
         alergias.setIconSclass("z-icon-exclamation");
         alergias.setWidth("100%");
-        
+
         Navitem diagnosticos = new Navitem();
         diagnosticos.setLabel("Diagnósticos");
+        diagnosticos.setId("d");
         diagnosticos.setIconSclass("z-icon-check-circle-o");
         diagnosticos.setWidth("100%");
-        
+
         Navitem intervenciones = new Navitem();
         intervenciones.setLabel("Intervenciones");
+        intervenciones.setId("i");
         intervenciones.setIconSclass("z-icon-hospital-o");
         intervenciones.setWidth("100%");
-        
+
         Navitem medicamentos = new Navitem();
         medicamentos.setLabel("Medicamentos");
+        medicamentos.setId("m");
         medicamentos.setIconSclass("z-icon-medkit");
         medicamentos.setWidth("100%");
-        
+
         Navitem signos = new Navitem();
         signos.setLabel("Signos");
+        signos.setId("s");
         signos.setIconSclass("z-icon-heartbeat");
         signos.setWidth("100%");
-        
+
         Navitem historia = new Navitem();
         historia.setLabel("Historia");
+        historia.setId("h");
         historia.setIconSclass("z-icon-book");
         historia.setWidth("100%");
 
@@ -143,6 +155,42 @@ public class Main extends Window {
         navbar.appendChild(medicamentos);
         navbar.appendChild(signos);
         navbar.appendChild(historia);
+
+        EventListener<SelectEvent> eventListener = (SelectEvent t) -> {
+            Navitem navitem = (Navitem) t.getSelectedItems().iterator().next();
+            String id = navitem.getId();
+            switch (id) {
+                case "k":
+                    Notification.showInfo(navitem.getLabel());
+                    break;
+                case "c":
+                    Notification.showInfo(navitem.getLabel());
+                    break;
+                case "r":
+                    Notification.showInfo(navitem.getLabel());
+                    break;
+                case "a":
+                    Notification.showInfo(navitem.getLabel());
+                    break;
+                case "d":
+                    Notification.showInfo(navitem.getLabel());
+                    break;
+                case "i":
+                    Notification.showInfo(navitem.getLabel());
+                    break;
+                case "m":
+                    Notification.showInfo(navitem.getLabel());
+                    break;
+                case "s":
+                    Notification.showInfo(navitem.getLabel());
+                    break;
+                case "h":
+                    Notification.showInfo(navitem.getLabel());
+                    break;
+            }
+        };
+
+        navbar.addEventListener(Events.ON_SELECT, eventListener);
 
         west.appendChild(navbar);
 
