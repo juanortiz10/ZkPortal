@@ -5,15 +5,16 @@
  */
 package com.delarosa.portal.ui;
 
-import com.delarosa.portal.db.entity.Alergia;
 import com.delarosa.portal.db.entity.CodigoCIE;
 import com.delarosa.portal.utils.RestConn;
+import com.delarosa.portal.zk.GridLayout;
 import com.delarosa.portal.zk.Listhead;
 import com.delarosa.portal.zk.SearchWindow;
 import com.google.gson.GsonBuilder;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.ListitemRenderer;
@@ -23,15 +24,26 @@ import org.zkoss.zul.Space;
  *
  * @author lama
  */
-public class CodigosCIE extends SearchWindow {
+public abstract class CodigosCIE extends SearchWindow {
+
+    private Datebox fechaIni;
+    private Datebox fechaFin;
 
     public CodigosCIE() {
         super(false);
     }
 
+    public abstract String getItemName();
+
+    public abstract String getRestResponseURL();
+
     @Override
     public Component getSearchPanel() {
-        return new Space();
+        GridLayout gridLayout = new GridLayout();
+        fechaIni = new Datebox();
+        fechaFin = new Datebox();
+        gridLayout.addRow("Fecha Inicial", fechaIni, "Fecha Final", fechaFin, null, null);
+        return gridLayout;
     }
 
     @Override
@@ -46,17 +58,15 @@ public class CodigosCIE extends SearchWindow {
     @Override
     public Listhead getListHeader() {
         Listhead listhead = new Listhead();
-        listhead.newHeader("Tipo");
-        listhead.newHeader("Alergia");
-        listhead.newHeader("Severidad");
-        listhead.newHeader("Reacción");
+        listhead.newHeader("Fecha");
+        listhead.newHeader("Código");
+        listhead.newHeader(getItemName());
         return listhead;
     }
 
     @Override
     public Collection<?> getResults() {
         GsonBuilder gsonBuilder = new GsonBuilder();
-        return gsonBuilder.create().fromJson(RestConn.getRestResponse("http://192.168.11.190:8000/pacientes/1/alergias"), CodigoCIE.LIST_TYPE);
+        return gsonBuilder.create().fromJson(RestConn.getRestResponse(getRestResponseURL()), CodigoCIE.LIST_TYPE);
     }
-
 }

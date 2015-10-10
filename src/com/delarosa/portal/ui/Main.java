@@ -183,10 +183,10 @@ public final class Main extends Window {
                    open(new Alergias());
                     break;
                 case "d":
-                    Notification.showInfo(navitem.getLabel());
+                    open(new Diagnosticos());
                     break;
                 case "i":
-                    Notification.showInfo(navitem.getLabel());
+                    open(new Intervenciones());
                     break;
                 case "m":
                     Notification.showInfo(navitem.getLabel());
