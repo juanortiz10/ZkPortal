@@ -180,7 +180,7 @@ public final class Main extends Window {
                     open(new Recetas());
                     break;
                 case "a":
-                   open(new Alergias());
+                    open(new Alergias());
                     break;
                 case "d":
                     open(new Diagnosticos());
@@ -192,7 +192,7 @@ public final class Main extends Window {
                     open(new Medicamentos());
                     break;
                 case "s":
-                    Notification.showInfo(navitem.getLabel());
+                    open(new Signos());
                     break;
                 case "h":
                     open(new Historia());

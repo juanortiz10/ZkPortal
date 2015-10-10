@@ -2,6 +2,7 @@ package com.delarosa.portal.db.entity;
 
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -10,9 +11,18 @@ import java.util.ArrayList;
  */
 public class Signo {
 
+    private Timestamp fecha;
     private String nombre;
     private double valor;
     private String unidad;
+
+    public Timestamp getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Timestamp fecha) {
+        this.fecha = fecha;
+    }
 
     public String getNombre() {
         return nombre;
