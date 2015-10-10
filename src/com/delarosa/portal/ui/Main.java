@@ -73,7 +73,11 @@ public final class Main extends Window {
 
             appendChild(borderlayout);
 
-            center.appendChild(new Test());
+            addEventListener("onLoad", (Event t) -> {
+                open(new Home());
+            });
+
+            Events.echoEvent("onLoad", this, null);
 
             setBorder(false);
             setWidth("100%");
@@ -167,15 +171,13 @@ public final class Main extends Window {
             String id = navitem.getId();
             switch (id) {
                 case "k":
-                    Notification.showInfo(navitem.getLabel());
+                    open(new Home());
                     break;
                 case "c":
-                    Notification.showInfo(navitem.getLabel());
-                    open(new OpEventos());
+                    open(new Eventos());
                     break;
                 case "r":
-                    Notification.showInfo(navitem.getLabel());
-                    open(new OpRecetas());
+                    open(new Recetas());
                     break;
                 case "a":
                     Notification.showInfo(navitem.getLabel());
@@ -193,7 +195,6 @@ public final class Main extends Window {
                     Notification.showInfo(navitem.getLabel());
                     break;
                 case "h":
-                    //clase historia
                     open(new Historia());
                     break;
             }

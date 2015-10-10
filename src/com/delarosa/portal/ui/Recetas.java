@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.delarosa.portal.ui;
 
 import com.delarosa.portal.zk.GridLayout;
@@ -18,12 +13,12 @@ import org.zkoss.zul.ListitemRenderer;
  *
  * @author tulio_93
  */
-public class OpRecetas extends SearchWindow{
+public class Recetas extends SearchWindow{
 
     private Datebox fechaIni;
     private Datebox fechaFin;
     
-    public OpRecetas() {
+    public Recetas() {
         super(true);
     }
 

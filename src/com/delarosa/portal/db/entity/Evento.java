@@ -1,23 +1,39 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.delarosa.portal.db.entity;
 
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 /**
  *
  * @author tulio_93
  */
-public class Event {
+public class Evento {
+
     private String id;
     private Timestamp fecha;
-    private Medic medico;
+    private String medico;
+    private String cedula;
     private String especialidad;
     private String tipo;
     private String motivo;
+
+    public String getMedico() {
+        return medico;
+    }
+
+    public void setMedico(String medico) {
+        this.medico = medico;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
 
     public String getId() {
         return id;
@@ -35,14 +51,6 @@ public class Event {
         this.fecha = fecha;
     }
 
-    public Medic getMedico() {
-        return medico;
-    }
-
-    public void setMedico(Medic medico) {
-        this.medico = medico;
-    }
-    
     public String getEspecialidad() {
         return especialidad;
     }
@@ -67,5 +75,7 @@ public class Event {
         this.motivo = motivo;
     }
 
-    
+    public static final Type listType = new TypeToken<ArrayList<Evento>>() {
+    }.getType();
+
 }
