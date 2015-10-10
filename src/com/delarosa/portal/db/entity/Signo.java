@@ -1,5 +1,9 @@
 package com.delarosa.portal.db.entity;
 
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
 /**
  *
  * @author odelarosa
@@ -33,4 +37,7 @@ public class Signo {
     public void setUnidad(String unidad) {
         this.unidad = unidad;
     }
+
+    public static final Type LIST_TYPE = new TypeToken<ArrayList<Signo>>() {
+    }.getType();
 }

@@ -2,8 +2,8 @@ package com.delarosa.portal.ui;
 
 import com.delarosa.portal.authentication.MyAuthenticationService;
 import com.delarosa.portal.utils.CookieController;
-import com.delarosa.portal.utils.ZkUtils;
 import com.delarosa.portal.zk.Notification;
+import com.delarosa.portal.zk.ZKUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.zkoss.essentials.services.AuthenticationService;
 import org.zkoss.zk.ui.Executions;
@@ -76,8 +76,8 @@ public class Index extends Window {
 
     private void login() {
         Clients.clearWrongValue(Index.this);
-        ZkUtils.notNull(user);
-        ZkUtils.notNull(pass);
+        ZKUtils.notNull(user);
+        ZKUtils.notNull(pass);
 
         if (!authService.login(user.getText(), pass.getText())) {
             Notification.showWarning("Usuario y/o contraseña invália");

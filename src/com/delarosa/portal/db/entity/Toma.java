@@ -1,5 +1,7 @@
 package com.delarosa.portal.db.entity;
 
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,4 +39,7 @@ public class Toma {
     public void setSignos(List<Signo> signos) {
         this.signos = signos;
     }
+    
+    public static final Type LIST_TYPE = new TypeToken<ArrayList<Toma>>() {
+    }.getType();
 }

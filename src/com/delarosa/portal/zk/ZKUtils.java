@@ -7,7 +7,6 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Page;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Cell;
@@ -17,9 +16,11 @@ import org.zkoss.zul.Iframe;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.North;
+import org.zkoss.zul.SimpleConstraint;
 import org.zkoss.zul.Toolbar;
 import org.zkoss.zul.Toolbarbutton;
 import org.zkoss.zul.Window;
+import org.zkoss.zul.impl.InputElement;
 
 /**
  *
@@ -93,12 +94,8 @@ public class ZKUtils {
 
         Toolbarbutton close = new Toolbarbutton(null, "/images/close.png");
         close.setTooltiptext("Cerrar");
-        close.addEventListener("onClick", new EventListener<Event>() {
-
-            @Override
-            public void onEvent(Event t) throws Exception {
-                window.onClose();
-            }
+        close.addEventListener("onClick", (Event t) -> {
+            window.onClose();
         });
 
         toolbar.appendChild(close);
@@ -135,5 +132,11 @@ public class ZKUtils {
     // Detect if client is mobile device (such as Android or iOS devices)
     public static boolean isMobile() {
         return Executions.getCurrent().getBrowser("mobile") != null;
+    }
+
+    private final static SimpleConstraint NULL_CONSTRAINT = new SimpleConstraint(SimpleConstraint.NO_EMPTY);
+
+    public static void notNull(InputElement inputElement) {
+        NULL_CONSTRAINT.validate(inputElement, inputElement.getText());
     }
 }
