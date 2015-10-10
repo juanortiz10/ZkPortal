@@ -1,23 +1,27 @@
 package com.delarosa.portal.ui;
 
+import com.delarosa.portal.db.entity.Receta;
+import com.delarosa.portal.utils.RestConn;
 import com.delarosa.portal.zk.GridLayout;
 import com.delarosa.portal.zk.Listhead;
 import com.delarosa.portal.zk.SearchWindow;
+import com.google.gson.GsonBuilder;
 import java.util.Collection;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Datebox;
+import org.zkoss.zul.Listcell;
+import org.zkoss.zul.Listitem;
 import org.zkoss.zul.ListitemRenderer;
-
 
 /**
  *
  * @author tulio_93
  */
-public class Recetas extends SearchWindow{
+public class Recetas extends SearchWindow {
 
     private Datebox fechaIni;
     private Datebox fechaFin;
-    
+
     public Recetas() {
         super(true);
     }
@@ -27,22 +31,30 @@ public class Recetas extends SearchWindow{
         GridLayout gridLayout = new GridLayout();
         fechaIni = new Datebox();
         fechaFin = new Datebox();
-        gridLayout.addRow("Fecha Inicial", fechaIni, "Fecha Final", fechaFin, "", null);
-        return gridLayout;    }
+        gridLayout.addRow("Fecha Inicial", fechaIni, "Fecha Final", fechaFin, null, null);
+        return gridLayout;
+    }
 
     @Override
     public ListitemRenderer<?> getItemRenderer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (Listitem lstm, Receta t, int i) -> {
+            lstm.appendChild(new Listcell(Index.SDF.format(t.getFecha())));
+            lstm.appendChild(new Listcell(t.getNotas()));
+        };
     }
 
     @Override
     public Listhead getListHeader() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Listhead listhead = new Listhead();
+        listhead.newHeader("Fecha");
+        listhead.newHeader("Notas");
+        return listhead;
     }
 
     @Override
     public Collection<?> getResults() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        return gsonBuilder.create().fromJson(RestConn.getRestResponse("http://192.168.11.190:8000/pacientes/1/recetas"), Receta.LIST_TYPE);
     }
-    
+
 }

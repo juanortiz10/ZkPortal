@@ -4,6 +4,7 @@ import com.delarosa.portal.authentication.MyAuthenticationService;
 import com.delarosa.portal.utils.CookieController;
 import com.delarosa.portal.zk.Notification;
 import com.delarosa.portal.zk.ZKUtils;
+import java.text.SimpleDateFormat;
 import org.apache.commons.lang3.StringUtils;
 import org.zkoss.essentials.services.AuthenticationService;
 import org.zkoss.zk.ui.Executions;
@@ -24,6 +25,7 @@ import org.zkoss.zul.theme.Themes;
  */
 public class Index extends Window {
 
+    public static final SimpleDateFormat SDF = new SimpleDateFormat("MM/dd/yyyy");
     private final Textbox user = new Textbox();
     private final Textbox pass = new Textbox();
     private final Button ok = new Button("LOGIN");

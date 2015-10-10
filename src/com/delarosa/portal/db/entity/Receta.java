@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.delarosa.portal.db.entity;
 
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +11,10 @@ import java.util.List;
  * @author tulio_93
  */
 public class Receta {
+
     private Timestamp fecha;
     private String evento;
-    private List<Detalle> detalles = new ArrayList<>();
+    private List<Detalle> medicamentos = new ArrayList<>();
     private String notas;
 
     public Timestamp getFecha() {
@@ -35,14 +33,6 @@ public class Receta {
         this.evento = evento;
     }
 
-    public List<Detalle> getDetalles() {
-        return detalles;
-    }
-
-    public void setDetalles(List<Detalle> detalles) {
-        this.detalles = detalles;
-    }
-
     public String getNotas() {
         return notas;
     }
@@ -50,5 +40,16 @@ public class Receta {
     public void setNotas(String notas) {
         this.notas = notas;
     }
-    
+
+    public List<Detalle> getMedicamentos() {
+        return medicamentos;
+    }
+
+    public void setMedicamentos(List<Detalle> medicamentos) {
+        this.medicamentos = medicamentos;
+    }
+
+    public static final Type LIST_TYPE = new TypeToken<ArrayList<Receta>>() {
+    }.getType();
+
 }

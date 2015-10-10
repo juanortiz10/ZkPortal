@@ -5,18 +5,15 @@ import com.delarosa.portal.utils.RestConn;
 import com.delarosa.portal.zk.GridLayout;
 import com.delarosa.portal.zk.Listhead;
 import com.delarosa.portal.zk.SearchWindow;
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
 import java.lang.reflect.Type;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.zkoss.zk.ui.Component;
@@ -52,7 +49,7 @@ public class Eventos extends SearchWindow {
     public ListitemRenderer<?> getItemRenderer() {
         return (Listitem lstm, Evento t, int i) -> {
             new Listcell(t.getId()).setParent(lstm);
-            new Listcell(new SimpleDateFormat("MM/dd/yyyy").format(t.getFecha())).setParent(lstm);
+            new Listcell(Index.SDF.format(t.getFecha())).setParent(lstm);
             new Listcell(t.getMedico()).setParent(lstm);
             new Listcell(t.getCedula()).setParent(lstm);
             new Listcell(t.getEspecialidad()).setParent(lstm);
@@ -76,17 +73,7 @@ public class Eventos extends SearchWindow {
 
     @Override
     public Collection<?> getResults() {
-        JsonDeserializer<Timestamp> DESERIALIZER = (JsonElement json, Type typeOfT, JsonDeserializationContext context) -> {
-            try {
-                return json == null ? null : new Timestamp(new SimpleDateFormat("yyyy-MM-dd").parse(json.getAsString()).getTime());
-            } catch (ParseException ex) {
-                Logger.getLogger(Eventos.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            return null;
-        };
-
         GsonBuilder gsonBuilder = new GsonBuilder();
-        //gsonBuilder = gsonBuilder.registerTypeAdapter(Date.class, DESERIALIZER);
         return gsonBuilder.create().fromJson(RestConn.getRestResponse("http://192.168.11.190:8000/pacientes/1/eventos"), Evento.LIST_TYPE);
     }
 
