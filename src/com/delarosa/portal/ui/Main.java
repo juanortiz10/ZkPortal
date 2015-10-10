@@ -189,7 +189,7 @@ public final class Main extends Window {
                     open(new Intervenciones());
                     break;
                 case "m":
-                    Notification.showInfo(navitem.getLabel());
+                    open(new Medicamentos());
                     break;
                 case "s":
                     Notification.showInfo(navitem.getLabel());

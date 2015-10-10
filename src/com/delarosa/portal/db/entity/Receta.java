@@ -14,7 +14,7 @@ public class Receta {
 
     private Timestamp fecha;
     private String evento;
-    private List<Detalle> medicamentos = new ArrayList<>();
+    private List<Medicamento> medicamentos = new ArrayList<>();
     private String notas;
 
     public Timestamp getFecha() {
@@ -41,11 +41,11 @@ public class Receta {
         this.notas = notas;
     }
 
-    public List<Detalle> getMedicamentos() {
+    public List<Medicamento> getMedicamentos() {
         return medicamentos;
     }
 
-    public void setMedicamentos(List<Detalle> medicamentos) {
+    public void setMedicamentos(List<Medicamento> medicamentos) {
         this.medicamentos = medicamentos;
     }
 

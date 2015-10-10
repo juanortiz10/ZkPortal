@@ -5,11 +5,15 @@
  */
 package com.delarosa.portal.db.entity;
 
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
 /**
  *
  * @author tulio_93
  */
-public class Detalle {
+public class Medicamento {
     private String codigo;
     private String nombre;
     private String dosis;
@@ -54,5 +58,7 @@ public class Detalle {
 
     public void setVia(String via) {
         this.via = via;
-    }   
+    }
+    public static final Type LIST_TYPE = new TypeToken<ArrayList<Medicamento>>() {
+    }.getType();
 }
