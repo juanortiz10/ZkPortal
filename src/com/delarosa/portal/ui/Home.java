@@ -4,6 +4,7 @@ import com.delarosa.portal.utils.RestConn;
 import com.delarosa.portal.zk.Chart;
 import com.delarosa.portal.zk.ChartBuilder;
 import com.delarosa.portal.zk.Window;
+import com.delarosa.portal.zk.ZKUtils;
 import com.google.gson.Gson;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -58,7 +59,11 @@ public class Home extends Window {
             chartBuilder.setLabels(map2.get(key).toArray(new String[]{}));
             chartBuilder.setValues(map.get(key).toArray(new Double[]{}));
             chartBuilder.setTitle(key.toUpperCase());
-            chartBuilder.setWidth("100%");
+            if (ZKUtils.isMobile()) {
+                chartBuilder.setWidth("100%");
+            } else {
+                chartBuilder.setWidth("400px");
+            }
             chartBuilder.setHeigth("400px");
 
             final Chart chart = chartBuilder.build();

@@ -14,7 +14,7 @@ public class Chart extends Cell {
     private final static String HTML_LINE
             = "<script src=\"Chart.js\"></script>\n"
             + "\n"
-            + "<canvas id=\"%s\" style=\"width:100%%;height:100%%\"></canvas>\n"
+            + "<canvas id=\"%s\" style=\"width:%s;height:%s\"></canvas>\n"
             + "<div width=\"100%%\" style=\"text-align:center\">\n"
             + "	%s\n"
             + "</div>\n"
@@ -76,7 +76,7 @@ public class Chart extends Cell {
 
         String id = UUID.randomUUID().toString();
 
-        Html html1 = new Html(String.format(html, id, this.title, id, StringUtils.join(lbls, ","), StringUtils.join(vls, ",")));
+        Html html1 = new Html(String.format(html, id, widthUnits, heightUnits, this.title, id, StringUtils.join(lbls, ","), StringUtils.join(vls, ",")));
         appendChild(html1);
     }
 
