@@ -5,26 +5,30 @@
  */
 package com.delarosa.portal.db.entity;
 
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 /**
  *
- * @author tulio_93
+ * @author lama
  */
-public class Intervencion {
-    private String evento;
+public class CodigoCIE {
+
+    private int evento;
     private Timestamp fecha;
     private String codigo;
     private String nombre;
 
-    public String getEvento() {
+    public int getEvento() {
         return evento;
     }
 
-    public void setEvento(String evento) {
+    public void setEvento(int evento) {
         this.evento = evento;
     }
-    
+
     public Timestamp getFecha() {
         return fecha;
     }
@@ -48,6 +52,7 @@ public class Intervencion {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-   
+    
+    public static final Type LIST_TYPE = new TypeToken<ArrayList<CodigoCIE>>() {
+    }.getType();
 }

@@ -1,0 +1,62 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.delarosa.portal.ui;
+
+import com.delarosa.portal.db.entity.Alergia;
+import com.delarosa.portal.db.entity.CodigoCIE;
+import com.delarosa.portal.utils.RestConn;
+import com.delarosa.portal.zk.Listhead;
+import com.delarosa.portal.zk.SearchWindow;
+import com.google.gson.GsonBuilder;
+import java.text.SimpleDateFormat;
+import java.util.Collection;
+import org.zkoss.zk.ui.Component;
+import org.zkoss.zul.Listcell;
+import org.zkoss.zul.Listitem;
+import org.zkoss.zul.ListitemRenderer;
+import org.zkoss.zul.Space;
+
+/**
+ *
+ * @author lama
+ */
+public class CodigosCIE extends SearchWindow {
+
+    public CodigosCIE() {
+        super(false);
+    }
+
+    @Override
+    public Component getSearchPanel() {
+        return new Space();
+    }
+
+    @Override
+    public ListitemRenderer<?> getItemRenderer() {
+        return (Listitem lstm, CodigoCIE cie, int i) -> {
+            new Listcell(new SimpleDateFormat("MM/dd/yyyy").format(cie.getFecha())).setParent(lstm);
+            new Listcell(cie.getCodigo()).setParent(lstm);
+            new Listcell(cie.getNombre()).setParent(lstm);
+        };
+    }
+
+    @Override
+    public Listhead getListHeader() {
+        Listhead listhead = new Listhead();
+        listhead.newHeader("Tipo");
+        listhead.newHeader("Alergia");
+        listhead.newHeader("Severidad");
+        listhead.newHeader("Reacción");
+        return listhead;
+    }
+
+    @Override
+    public Collection<?> getResults() {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        return gsonBuilder.create().fromJson(RestConn.getRestResponse("http://192.168.11.190:8000/pacientes/1/alergias"), CodigoCIE.LIST_TYPE);
+    }
+
+}
