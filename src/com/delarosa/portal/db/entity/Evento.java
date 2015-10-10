@@ -75,7 +75,7 @@ public class Evento {
         this.motivo = motivo;
     }
 
-    public static final Type listType = new TypeToken<ArrayList<Evento>>() {
+    public static final Type LIST_TYPE = new TypeToken<ArrayList<Evento>>() {
     }.getType();
 
 }

@@ -87,7 +87,7 @@ public class Eventos extends SearchWindow {
 
         GsonBuilder gsonBuilder = new GsonBuilder();
         //gsonBuilder = gsonBuilder.registerTypeAdapter(Date.class, DESERIALIZER);
-        return gsonBuilder.create().fromJson(RestConn.getRestResponse("http://192.168.11.190:8000/pacientes/1/eventos"), Evento.listType);
+        return gsonBuilder.create().fromJson(RestConn.getRestResponse("http://192.168.11.190:8000/pacientes/1/eventos"), Evento.LIST_TYPE);
     }
 
 }

@@ -46,10 +46,10 @@ public class Chart extends Cell {
     private String heightUnits;
     private String title = StringUtils.EMPTY;
     private String[] labels = {};
-    private double[] values = {};
+    private Double[] values = {};
     private int type;
 
-    public Chart(int type, String width, String height, String title, String[] labels, double[] values) {
+    public Chart(int type, String width, String height, String title, String[] labels, Double[] values) {
         this.type = type;
         this.widthUnits = StringUtils.defaultIfBlank(width, "400px");
         this.heightUnits = StringUtils.defaultIfBlank(height, "400px");
@@ -104,7 +104,7 @@ public class Chart extends Cell {
         return labels;
     }
 
-    public double[] getValues() {
+    public Double[] getValues() {
         return values;
     }
 

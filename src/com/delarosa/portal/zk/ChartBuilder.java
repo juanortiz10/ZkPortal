@@ -14,7 +14,7 @@ public class ChartBuilder {
     private String height;
     private String title;
     private String[] labels;
-    private double[] values;
+    private Double[] values;
     private int type;
 
 
@@ -38,7 +38,7 @@ public class ChartBuilder {
         return this;
     }
 
-    public ChartBuilder setValues(double... values) {
+    public ChartBuilder setValues(Double... values) {
         this.values = values;
         return this;
     }
