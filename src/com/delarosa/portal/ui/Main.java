@@ -180,7 +180,7 @@ public final class Main extends Window {
                     open(new Recetas());
                     break;
                 case "a":
-                    Notification.showInfo(navitem.getLabel());
+                   open(new Alergias());
                     break;
                 case "d":
                     Notification.showInfo(navitem.getLabel());

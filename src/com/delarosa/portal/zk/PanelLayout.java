@@ -25,6 +25,9 @@ public final class PanelLayout extends Panel {
     }
 
     public Panelchildren newPanelChildren(String title, boolean collapsible, Component component) {
+        if(component == null){
+            return null;
+        }
         return newPanelChildren(title, collapsible, new Component[]{component});
     }
 
