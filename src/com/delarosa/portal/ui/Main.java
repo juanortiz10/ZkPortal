@@ -171,9 +171,11 @@ public final class Main extends Window {
                     break;
                 case "c":
                     Notification.showInfo(navitem.getLabel());
+                    open(new OpEventos());
                     break;
                 case "r":
                     Notification.showInfo(navitem.getLabel());
+                    open(new OpRecetas());
                     break;
                 case "a":
                     Notification.showInfo(navitem.getLabel());
