@@ -1,8 +1,10 @@
 package com.delarosa.portal.ui;
 
 import com.delarosa.portal.authentication.MyAuthenticationService;
+import com.delarosa.portal.utils.CookieController;
 import com.delarosa.portal.utils.ZkUtils;
 import com.delarosa.portal.zk.Notification;
+import org.apache.commons.lang3.StringUtils;
 import org.zkoss.essentials.services.AuthenticationService;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
@@ -14,6 +16,7 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Toolbarbutton;
 import org.zkoss.zul.Vbox;
 import org.zkoss.zul.Window;
+import org.zkoss.zul.theme.Themes;
 
 /**
  *
@@ -28,6 +31,10 @@ public class Index extends Window {
     private final AuthenticationService authService = new MyAuthenticationService();
 
     public Index() {
+        String theme = CookieController.getCookie("theme");
+        if (StringUtils.isNoneBlank(theme)) {
+            Themes.setTheme(Executions.getCurrent(), theme);
+        }
         Vbox vbox = new Vbox();
         vbox.setSizedByContent(true);
         vbox.setSclass("login-form");
