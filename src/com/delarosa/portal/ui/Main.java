@@ -66,9 +66,10 @@ public final class Main extends Window {
             west.addEventListener(Events.ON_SWIPE, swipe);
             center.addEventListener(Events.ON_SWIPE, swipe);
 
-            if ("Y".equals(Executions.getCurrent().getAttribute("external"))) {
+            if (!"Y".equals(Sessions.getCurrent().getAttribute("external"))) {
                 borderlayout.appendChild(north);
             }
+            
             borderlayout.appendChild(west);
             borderlayout.appendChild(center);
             borderlayout.setWidth("100%");
