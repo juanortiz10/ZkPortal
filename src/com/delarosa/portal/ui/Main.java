@@ -7,6 +7,7 @@ import org.zkoss.essentials.services.AuthenticationService;
 import org.zkoss.essentials.services.UserCredential;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
@@ -65,7 +66,9 @@ public final class Main extends Window {
             west.addEventListener(Events.ON_SWIPE, swipe);
             center.addEventListener(Events.ON_SWIPE, swipe);
 
-            borderlayout.appendChild(north);
+            if ("Y".equals(Executions.getCurrent().getAttribute("external"))) {
+                borderlayout.appendChild(north);
+            }
             borderlayout.appendChild(west);
             borderlayout.appendChild(center);
             borderlayout.setWidth("100%");
