@@ -25,3 +25,7 @@ body {
     -o-border-radius: 0.4em;
     -moz-border-radius: 0.4em;
 }
+
+.z-row:hover > .z-row-inner, .z-row:hover > .z-cell {
+        background: none;
+}

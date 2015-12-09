@@ -6,16 +6,7 @@ import com.delarosa.portal.zk.GridLayout;
 import com.delarosa.portal.zk.Listhead;
 import com.delarosa.portal.zk.SearchWindow;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import java.lang.reflect.Type;
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Listcell;
@@ -61,13 +52,13 @@ public class Eventos extends SearchWindow {
     @Override
     public Listhead getListHeader() {
         Listhead listhead = new Listhead();
-        listhead.newHeader("ID");
-        listhead.newHeader("Fecha");
-        listhead.newHeader("Nombre Medico");
-        listhead.newHeader("Cedula");
-        listhead.newHeader("Especialidad");
-        listhead.newHeader("Tipo");
-        listhead.newHeader("Motivo");
+        listhead.newHeader("ID").setWidth("50px");
+        listhead.newHeader("Fecha").setHflex("min");
+        listhead.newHeader("Nombre Medico").setHflex("1");
+        listhead.newHeader("Cedula").setHflex("min");
+        listhead.newHeader("Especialidad").setHflex("min");
+        listhead.newHeader("Tipo").setHflex("min");
+        listhead.newHeader("Motivo").setHflex("min");
         return listhead;
     }
 

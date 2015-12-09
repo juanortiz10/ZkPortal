@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.delarosa.portal.ui;
 
 import com.delarosa.portal.db.entity.Alergia;
@@ -74,10 +69,10 @@ public class Alergias extends SearchWindow {
     @Override
     public Listhead getListHeader() {
         Listhead listhead = new Listhead();
-        listhead.newHeader("Tipo");
-        listhead.newHeader("Alergia");
-        listhead.newHeader("Severidad");
-        listhead.newHeader("Reacción");
+        listhead.newHeader("Tipo").setHflex("min");
+        listhead.newHeader("Alergia").setHflex("min");
+        listhead.newHeader("Severidad").setHflex("min");
+        listhead.newHeader("Reacción").setHflex("1");
         return listhead;
     }
 

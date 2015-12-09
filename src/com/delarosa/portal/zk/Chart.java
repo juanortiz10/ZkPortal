@@ -19,6 +19,7 @@ public class Chart extends Cell {
             + "	%s\n"
             + "</div>\n"
             + "<script>\n"
+            //+ " Chart.defaults.global.responsive = true;\n"
             + "	var ctx = document.getElementById(\"%s\").getContext(\"2d\");\n"
             + "\n"
             + "	var data = {\n"
@@ -37,7 +38,7 @@ public class Chart extends Cell {
             + "	    ]\n"
             + "	};			\n"
             + "	\n"
-            + "	var myLineChart = new Chart(ctx).Line(data, {});\n"
+            + "	var myLineChart = new Chart(ctx).Line(data, {TTTT});\n"
             + "\n"
             + "</script>";
 
@@ -76,7 +77,7 @@ public class Chart extends Cell {
 
         String id = UUID.randomUUID().toString();
 
-        Html html1 = new Html(String.format(html, id, widthUnits, heightUnits, this.title, id, StringUtils.join(lbls, ","), StringUtils.join(vls, ",")));
+        Html html1 = new Html(StringUtils.replace(String.format(html, id, widthUnits, heightUnits, this.title, id, StringUtils.join(lbls, ","), StringUtils.join(vls, ",")), "TTTT", "multiTooltipTemplate: \"<%= datasetLabel %> - <%= value %>\""));
         appendChild(html1);
     }
 

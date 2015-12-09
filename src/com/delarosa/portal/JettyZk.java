@@ -19,12 +19,14 @@ import org.eclipse.jetty.webapp.WebAppContext;
  */
 public class JettyZk {
 
+    public static final int PORT = 8090;
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         try {
-            Server server = new Server(8080);
+            Server server = new Server(PORT);
 
             // Handler for multiple web apps
             HandlerCollection handlers = new HandlerCollection();
@@ -59,7 +61,7 @@ public class JettyZk {
         JFXPanel jfxPanel = new JFXPanel(); // Scrollable JCompenent
         Platform.runLater(() -> { // FX components need to be managed by JavaFX
             WebView webView = new WebView();
-            webView.getEngine().load("http://localhost:8080/");
+            webView.getEngine().load("http://localhost:" + PORT + "/");
             jfxPanel.setScene(new Scene(webView));
             new Browser(jfxPanel).setVisible(true);
         });

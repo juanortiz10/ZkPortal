@@ -22,7 +22,7 @@ public class RestConn {
         String test = null;
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
-            HttpGet httpget = new HttpGet(restUrl);
+            HttpGet httpget = new HttpGet(restUrl+".json");
 
             System.out.println("Executing request " + httpget.getRequestLine());
 

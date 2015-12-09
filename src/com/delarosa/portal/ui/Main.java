@@ -1,7 +1,6 @@
 package com.delarosa.portal.ui;
 
 import com.delarosa.portal.authentication.MyAuthenticationService;
-import com.delarosa.portal.zk.Notification;
 import com.delarosa.portal.zk.ZKUtils;
 import org.zkoss.essentials.services.AuthenticationService;
 import org.zkoss.essentials.services.UserCredential;
@@ -20,6 +19,7 @@ import org.zkoss.zul.Center;
 import org.zkoss.zul.North;
 import org.zkoss.zul.West;
 import org.zkoss.zul.Window;
+import org.zkoss.zul.theme.Themes;
 
 /**
  *
@@ -66,10 +66,12 @@ public final class Main extends Window {
             west.addEventListener(Events.ON_SWIPE, swipe);
             center.addEventListener(Events.ON_SWIPE, swipe);
 
-            if (!"Y".equals(Sessions.getCurrent().getAttribute("external"))) {
+            if ("Y".equals(Sessions.getCurrent().getAttribute("external"))) {
+                Themes.setTheme(Executions.getCurrent(), "silvertail");
+            } else {
                 borderlayout.appendChild(north);
             }
-            
+
             borderlayout.appendChild(west);
             borderlayout.appendChild(center);
             borderlayout.setWidth("100%");
@@ -111,6 +113,12 @@ public final class Main extends Window {
         home.setIconSclass("z-icon-home");
         home.setWidth("100%");
         home.setSelected(true);
+
+        Navitem buscar = new Navitem();
+        buscar.setLabel("Búsqueda");
+        buscar.setId("b");
+        buscar.setIconSclass("z-icon-search");
+        buscar.setWidth("100%");
 
         Navitem citas = new Navitem();
         citas.setLabel("Citas");
@@ -161,6 +169,7 @@ public final class Main extends Window {
         historia.setWidth("100%");
 
         navbar.appendChild(home);
+        navbar.appendChild(buscar);
         navbar.appendChild(citas);
         navbar.appendChild(recetas);
         navbar.appendChild(alergias);
@@ -176,6 +185,9 @@ public final class Main extends Window {
             switch (id) {
                 case "k":
                     open(new Home());
+                    break;
+                case "b":
+                    open(new Busqueda());
                     break;
                 case "c":
                     open(new Eventos());

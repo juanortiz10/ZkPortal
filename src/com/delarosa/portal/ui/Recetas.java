@@ -46,8 +46,8 @@ public class Recetas extends SearchWindow {
     @Override
     public Listhead getListHeader() {
         Listhead listhead = new Listhead();
-        listhead.newHeader("Fecha");
-        listhead.newHeader("Notas");
+        listhead.newHeader("Fecha").setHflex("min");
+        listhead.newHeader("Notas").setHflex("1");
         return listhead;
     }
 
