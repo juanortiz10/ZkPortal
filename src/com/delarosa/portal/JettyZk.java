@@ -19,7 +19,7 @@ import org.eclipse.jetty.webapp.WebAppContext;
  */
 public class JettyZk {
 
-    public static final int PORT = 8090;
+    public static final int PORT = 9090;
 
     /**
      * @param args the command line arguments

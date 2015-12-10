@@ -36,7 +36,7 @@ public class Home extends Window {
     public Home() {
         super(false);
 
-        String json = RestConn.getRestResponse("http://192.168.11.190:8000/pacientes/1");
+        String json = RestConn.getRestResponse("http://127.0.0.1:8000/pacientes/1");
 
         Paciente paciente = new Gson().fromJson(json, Paciente.class);
 
@@ -70,7 +70,7 @@ public class Home extends Window {
 
         getPanelLayout().newPanelChildren("Datos Generales", true, gridLayout);
 
-        json = RestConn.getRestResponse("http://192.168.11.190:8000/pacientes/1/tomas_signos");
+        json = RestConn.getRestResponse("http://127.0.0.1:8000/pacientes/1/tomas_signos");
 
         List<Toma> tomas = new Gson().fromJson(json, Toma.LIST_TYPE);
 

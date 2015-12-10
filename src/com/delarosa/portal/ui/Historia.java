@@ -22,7 +22,7 @@ public class Historia extends Window {
     public Historia() {
         super(true);
 
-        String json = RestConn.getRestResponse("http://192.168.11.190:8000/pacientes/1");
+        String json = RestConn.getRestResponse("http://127.0.0.1:8000/pacientes/1");
         Paciente paciente = new Gson().fromJson(json, Paciente.class);
 
         Toolbarbutton refresh = new Toolbarbutton(null);

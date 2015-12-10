@@ -65,7 +65,7 @@ public class Eventos extends SearchWindow {
     @Override
     public Collection<?> getResults() {
         GsonBuilder gsonBuilder = new GsonBuilder();
-        return gsonBuilder.create().fromJson(RestConn.getRestResponse("http://192.168.11.190:8000/pacientes/1/eventos"), Evento.LIST_TYPE);
+        return gsonBuilder.create().fromJson(RestConn.getRestResponse("http://127.0.0.1:8000/pacientes/1/eventos"), Evento.LIST_TYPE);
     }
 
 }

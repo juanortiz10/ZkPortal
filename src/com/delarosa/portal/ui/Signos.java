@@ -60,7 +60,7 @@ public class Signos extends SearchWindow {
 
     @Override
     public Collection<?> getResults() {
-        String json = RestConn.getRestResponse("http://192.168.11.190:8000/pacientes/1/tomas_signos");
+        String json = RestConn.getRestResponse("http://127.0.0.1:8000/pacientes/1/tomas_signos");
         List<Toma> tomas = new Gson().fromJson(json, Toma.LIST_TYPE);
         List<Signo> signos = new ArrayList<>();
 

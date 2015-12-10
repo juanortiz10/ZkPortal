@@ -32,15 +32,8 @@ public final class Main extends Window {
     private final West west = new West();
     private final UserPanel userPanel = new UserPanel();
     private final North north = new North();
-    private final AuthenticationService authService = new MyAuthenticationService();
 
     public Main() {
-        UserCredential userCredential = authService.getUserCredential();
-
-        if (userCredential.isAnonymous()) {
-            Executions.getCurrent().sendRedirect("/index.zul");
-        } else {
-
             north.appendChild(userPanel);
             north.setStyle("background:#5687A8;text-align:right;");
 
@@ -96,7 +89,7 @@ public final class Main extends Window {
             if (ZKUtils.isMobile()) {
                 west.setOpen(false);
             }
-        }
+        
     }
 
     public void open(Component component) {

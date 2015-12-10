@@ -5,6 +5,7 @@ import com.delarosa.portal.utils.CookieController;
 import org.zkoss.essentials.services.AuthenticationService;
 import org.zkoss.essentials.services.UserCredential;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
@@ -27,9 +28,8 @@ public class UserPanel extends Div {
     private final AuthenticationService authService = new MyAuthenticationService();
 
     public UserPanel() {
-        UserCredential credential = authService.getUserCredential();
         Menubar menubar = new Menubar();
-        Menu userMenu = new Menu(credential.getName());
+        Menu userMenu = new Menu(Sessions.getCurrent().getAttribute("account").toString());
         userMenu.setIconSclass("z-icon-user");
 
         Menupopup menupopup = new Menupopup();

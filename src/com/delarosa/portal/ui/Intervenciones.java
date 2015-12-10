@@ -22,6 +22,6 @@ public class Intervenciones extends CodigosCIE {
 
     @Override
     public String getRestResponseURL() {
-        return "http://192.168.11.190:8000/pacientes/1/intervenciones";
+        return "http://127.0.0.1:8000/pacientes/1/intervenciones";
     }
 }
