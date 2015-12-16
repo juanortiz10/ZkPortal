@@ -77,7 +77,11 @@ public class WEventos extends SearchWindow {
     @Override
     public Collection<?> getResults() {
         GsonBuilder gsonBuilder = new GsonBuilder();
-        return gsonBuilder.create().fromJson(RestConn.getRestResponse("http://127.0.0.1:8000/pacientes/".concat(TokenAuthenticationService.getCurp().concat("/eventos"))), MEvento.LIST_TYPE);
+        StringBuilder url = new StringBuilder();
+        url.append("http://127.0.0.1:8000/pacientes/");
+        url.append(TokenAuthenticationService.getCurp());
+        url.append("/eventos");
+        return gsonBuilder.create().fromJson(RestConn.getRestResponse(url.toString()), MEvento.LIST_TYPE);
     }
 
 }

@@ -11,7 +11,6 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.zkoss.essentials.services.AuthenticationService;
 import org.zkoss.essentials.services.UserCredential;
-import org.zkoss.essentials.services.UserInfoService;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.Sessions;
 

@@ -80,7 +80,11 @@ public class WAlergias extends SearchWindow {
     @Override
     public Collection<?> getResults() {
         GsonBuilder gsonBuilder = new GsonBuilder();
-        return gsonBuilder.create().fromJson(RestConn.getRestResponse("http://127.0.0.1:8000/pacientes/".concat(TokenAuthenticationService.getCurp().concat("/alergias"))), MAlergia.LIST_TYPE);
+        StringBuilder url = new StringBuilder();
+        url.append("http://127.0.0.1:8000/pacientes/");
+        url.append(TokenAuthenticationService.getCurp());
+        url.append("/alergias");
+        return gsonBuilder.create().fromJson(RestConn.getRestResponse(url.toString()), MAlergia.LIST_TYPE);
     }
 
 }

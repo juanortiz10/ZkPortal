@@ -3,9 +3,7 @@ package com.delarosa.portal.ui;
 import com.delarosa.portal.authentication.TokenAuthenticationService;
 import com.delarosa.portal.utils.CookieController;
 import org.zkoss.essentials.services.AuthenticationService;
-import org.zkoss.essentials.services.UserCredential;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
@@ -16,7 +14,6 @@ import org.zkoss.zul.Menuitem;
 import org.zkoss.zul.Menupopup;
 import org.zkoss.zul.Menuseparator;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Messagebox.ClickEvent;
 import org.zkoss.zul.theme.Themes;
 
 /**

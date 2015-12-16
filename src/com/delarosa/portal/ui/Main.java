@@ -1,9 +1,6 @@
 package com.delarosa.portal.ui;
 
-import com.delarosa.portal.authentication.TokenAuthenticationService;
 import com.delarosa.portal.zk.ZKUtils;
-import org.zkoss.essentials.services.AuthenticationService;
-import org.zkoss.essentials.services.UserCredential;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -25,7 +22,7 @@ import org.zkoss.zul.theme.Themes;
  *
  * @author odelarosa
  */
-public final class WMain extends Window {
+public final class Main extends Window {
 
     private final Borderlayout borderlayout = new Borderlayout();
     private final Center center = new Center();
@@ -33,7 +30,7 @@ public final class WMain extends Window {
     private final WUserPanel userPanel = new WUserPanel();
     private final North north = new North();
 
-    public WMain() {
+    public Main() {
             north.appendChild(userPanel);
             north.setStyle("background:#5687A8;text-align:right;");
 
