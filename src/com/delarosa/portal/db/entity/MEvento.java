@@ -9,10 +9,10 @@ import java.util.ArrayList;
  *
  * @author tulio_93
  */
-public class Evento {
-
+public class MEvento {
     private String id;
-    private Timestamp fecha;
+    private Timestamp fechaInicio;
+    private Timestamp fechaFin;
     private String medico;
     private String cedula;
     private String especialidad;
@@ -43,14 +43,6 @@ public class Evento {
         this.id = id;
     }
 
-    public Timestamp getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Timestamp fecha) {
-        this.fecha = fecha;
-    }
-
     public String getEspecialidad() {
         return especialidad;
     }
@@ -74,8 +66,24 @@ public class Evento {
     public void setMotivo(String motivo) {
         this.motivo = motivo;
     }
+    
+    public Timestamp getFechaInicio() {
+        return fechaInicio;
+    }
 
-    public static final Type LIST_TYPE = new TypeToken<ArrayList<Evento>>() {
+    public void setFechaInicio(Timestamp fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public Timestamp getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(Timestamp fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public static final Type LIST_TYPE = new TypeToken<ArrayList<MEvento>>() {
     }.getType();
 
 }

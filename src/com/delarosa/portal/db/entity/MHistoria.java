@@ -4,7 +4,7 @@ package com.delarosa.portal.db.entity;
  *
  * @author odelarosa
  */
-public class Historia {
+public class MHistoria {
 
     private String personal;
     private String familiar;

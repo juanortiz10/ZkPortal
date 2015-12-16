@@ -10,11 +10,11 @@ import java.util.List;
  *
  * @author tulio_93
  */
-public class Receta {
+public class MReceta {
 
     private Timestamp fecha;
     private String evento;
-    private List<Medicamento> medicamentos = new ArrayList<>();
+    private ArrayList<MMedicamento> medicamentos = new ArrayList<>();
     private String notas;
 
     public Timestamp getFecha() {
@@ -41,15 +41,15 @@ public class Receta {
         this.notas = notas;
     }
 
-    public List<Medicamento> getMedicamentos() {
+    public ArrayList<MMedicamento> getMedicamentos() {
         return medicamentos;
     }
 
-    public void setMedicamentos(List<Medicamento> medicamentos) {
+    public void setMedicamentos(ArrayList<MMedicamento> medicamentos) {
         this.medicamentos = medicamentos;
     }
 
-    public static final Type LIST_TYPE = new TypeToken<ArrayList<Receta>>() {
+    public static final Type LIST_TYPE = new TypeToken<ArrayList<MReceta>>() {
     }.getType();
 
 }

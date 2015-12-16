@@ -6,11 +6,11 @@ import java.sql.Timestamp;
  *
  * @author Omar
  */
-public class User implements org.zkoss.essentials.entity.User {
+public class MUser implements org.zkoss.essentials.entity.User {
 
-    public static User clone(User user) {
+    public static MUser clone(MUser user) {
         try {
-            return (User) user.clone();
+            return (MUser) user.clone();
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
@@ -28,11 +28,11 @@ public class User implements org.zkoss.essentials.entity.User {
     private String password;
     private boolean active;
 
-    public User() {
+    public MUser() {
 
     }
 
-    public User(String account, String password, String fullName, String email) {
+    public MUser(String account, String password, String fullName, String email) {
         this();
         this.alias = account;
         this.name = fullName;
@@ -139,7 +139,7 @@ public class User implements org.zkoss.essentials.entity.User {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        User other = (User) obj;
+        MUser other = (MUser) obj;
         if (alias == null) {
             if (other.alias != null) {
                 return false;

@@ -1,6 +1,6 @@
 package com.delarosa.portal.ui;
 
-import com.delarosa.portal.authentication.MyAuthenticationService;
+import com.delarosa.portal.authentication.TokenAuthenticationService;
 import com.delarosa.portal.utils.CookieController;
 import com.delarosa.portal.zk.Notification;
 import com.delarosa.portal.zk.ZKUtils;
@@ -8,7 +8,6 @@ import java.text.SimpleDateFormat;
 import org.apache.commons.lang3.StringUtils;
 import org.zkoss.essentials.services.AuthenticationService;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.Clients;
@@ -31,7 +30,7 @@ public class Index extends Window {
     private final Textbox pass = new Textbox();
     private final Button ok = new Button("LOGIN");
     private final Toolbarbutton recover = new Toolbarbutton("Olvidaste tu contraseña?");
-    private final AuthenticationService authService = new MyAuthenticationService();
+    private final AuthenticationService authService = new TokenAuthenticationService();
 
     public Index() {
         String theme = CookieController.getCookie("theme");
@@ -86,7 +85,7 @@ public class Index extends Window {
             Notification.showWarning("Usuario y/o contraseña invália");
             return;
         }
-
+        
         Executions.getCurrent().sendRedirect("/main.zul");
     }
 

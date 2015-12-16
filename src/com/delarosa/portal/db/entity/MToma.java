@@ -10,11 +10,11 @@ import java.util.List;
  *
  * @author odelarosa
  */
-public class Toma {
+public class MToma {
 
     private Timestamp fecha;
     private String evento;
-    private List<Signo> signos = new ArrayList<>();
+    private ArrayList<MSigno> signos = new ArrayList<>();
 
     public Timestamp getFecha() {
         return fecha;
@@ -32,14 +32,14 @@ public class Toma {
         this.evento = evento;
     }
 
-    public List<Signo> getSignos() {
+    public ArrayList<MSigno> getSignos() {
         return signos;
     }
 
-    public void setSignos(List<Signo> signos) {
+    public void setSignos(ArrayList<MSigno> signos) {
         this.signos = signos;
     }
     
-    public static final Type LIST_TYPE = new TypeToken<ArrayList<Toma>>() {
+    public static final Type LIST_TYPE = new TypeToken<ArrayList<MToma>>() {
     }.getType();
 }

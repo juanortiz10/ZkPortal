@@ -1,6 +1,6 @@
 package com.delarosa.portal.ui;
 
-import com.delarosa.portal.authentication.MyAuthenticationService;
+import com.delarosa.portal.authentication.TokenAuthenticationService;
 import com.delarosa.portal.zk.ZKUtils;
 import org.zkoss.essentials.services.AuthenticationService;
 import org.zkoss.essentials.services.UserCredential;
@@ -25,15 +25,15 @@ import org.zkoss.zul.theme.Themes;
  *
  * @author odelarosa
  */
-public final class Main extends Window {
+public final class WMain extends Window {
 
     private final Borderlayout borderlayout = new Borderlayout();
     private final Center center = new Center();
     private final West west = new West();
-    private final UserPanel userPanel = new UserPanel();
+    private final WUserPanel userPanel = new WUserPanel();
     private final North north = new North();
 
-    public Main() {
+    public WMain() {
             north.appendChild(userPanel);
             north.setStyle("background:#5687A8;text-align:right;");
 
@@ -119,29 +119,12 @@ public final class Main extends Window {
         citas.setIconSclass("z-icon-calendar");
         citas.setWidth("100%");
 
-        Navitem recetas = new Navitem();
-        recetas.setLabel("Recetas");
-        recetas.setId("r");
-        recetas.setIconSclass("z-icon-pencil-square-o");
-        recetas.setWidth("100%");
-
         Navitem alergias = new Navitem();
         alergias.setLabel("Alergias");
         alergias.setId("a");
         alergias.setIconSclass("z-icon-exclamation");
         alergias.setWidth("100%");
 
-        Navitem diagnosticos = new Navitem();
-        diagnosticos.setLabel("Diagnósticos");
-        diagnosticos.setId("d");
-        diagnosticos.setIconSclass("z-icon-check-circle-o");
-        diagnosticos.setWidth("100%");
-
-        Navitem intervenciones = new Navitem();
-        intervenciones.setLabel("Intervenciones");
-        intervenciones.setId("i");
-        intervenciones.setIconSclass("z-icon-hospital-o");
-        intervenciones.setWidth("100%");
 
         Navitem medicamentos = new Navitem();
         medicamentos.setLabel("Medicamentos");
@@ -149,28 +132,11 @@ public final class Main extends Window {
         medicamentos.setIconSclass("z-icon-medkit");
         medicamentos.setWidth("100%");
 
-        Navitem signos = new Navitem();
-        signos.setLabel("Signos");
-        signos.setId("s");
-        signos.setIconSclass("z-icon-heartbeat");
-        signos.setWidth("100%");
-
-        Navitem historia = new Navitem();
-        historia.setLabel("Historia");
-        historia.setId("h");
-        historia.setIconSclass("z-icon-book");
-        historia.setWidth("100%");
-
         navbar.appendChild(home);
         navbar.appendChild(buscar);
         navbar.appendChild(citas);
-        navbar.appendChild(recetas);
         navbar.appendChild(alergias);
-        navbar.appendChild(diagnosticos);
-        navbar.appendChild(intervenciones);
         navbar.appendChild(medicamentos);
-        navbar.appendChild(signos);
-        navbar.appendChild(historia);
 
         EventListener<SelectEvent> eventListener = (SelectEvent t) -> {
             Navitem navitem = (Navitem) t.getSelectedItems().iterator().next();
@@ -180,31 +146,16 @@ public final class Main extends Window {
                     open(new Home());
                     break;
                 case "b":
-                    open(new Busqueda());
+                    open(new WBusqueda());
                     break;
                 case "c":
-                    open(new Eventos());
-                    break;
-                case "r":
-                    open(new Recetas());
+                    open(new WEventos());
                     break;
                 case "a":
-                    open(new Alergias());
-                    break;
-                case "d":
-                    open(new Diagnosticos());
-                    break;
-                case "i":
-                    open(new Intervenciones());
+                    open(new WAlergias());
                     break;
                 case "m":
-                    open(new Medicamentos());
-                    break;
-                case "s":
-                    open(new Signos());
-                    break;
-                case "h":
-                    open(new Historia());
+                    open(new WMedicamentos());
                     break;
             }
         };

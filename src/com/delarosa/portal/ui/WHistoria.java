@@ -1,6 +1,6 @@
 package com.delarosa.portal.ui;
 
-import com.delarosa.portal.db.entity.Paciente;
+import com.delarosa.portal.db.entity.MPaciente;
 import com.delarosa.portal.utils.RestConn;
 import com.delarosa.portal.zk.Window;
 import com.google.gson.Gson;
@@ -12,18 +12,18 @@ import org.zkoss.zul.Toolbarbutton;
  *
  * @author jvillegas
  */
-public class Historia extends Window {
+public class WHistoria extends Window {
 //textbox
 
     private final Textbox clinica;
     private final Textbox personal;
     private final Textbox familiar;
 
-    public Historia() {
+    public WHistoria() {
         super(true);
 
         String json = RestConn.getRestResponse("http://127.0.0.1:8000/pacientes/1");
-        Paciente paciente = new Gson().fromJson(json, Paciente.class);
+        MPaciente paciente = new Gson().fromJson(json, MPaciente.class);
 
         Toolbarbutton refresh = new Toolbarbutton(null);
         refresh.setIconSclass("z-icon-refresh fa-2x");
@@ -34,9 +34,9 @@ public class Historia extends Window {
         personal = new Textbox();
         familiar = new Textbox();
 
-        List<com.delarosa.portal.db.entity.Historia> list = paciente.getHistoria();
+        List<com.delarosa.portal.db.entity.MHistoria> list = paciente.getHistoria();
         if (!list.isEmpty()) {
-            com.delarosa.portal.db.entity.Historia hist = list.get(0);
+            com.delarosa.portal.db.entity.MHistoria hist = list.get(0);
             clinica.setValue(hist.getClinica());
             personal.setValue(hist.getPersonal());
             familiar.setValue(hist.getFamiliar());

@@ -1,7 +1,7 @@
 package com.delarosa.portal.authentication;
 
 import com.delarosa.portal.db.DB;
-import com.delarosa.portal.db.entity.User;
+import com.delarosa.portal.db.entity.MUser;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,11 +17,11 @@ import org.zkoss.essentials.services.UserInfoService;
 public class MyUserInfoService implements UserInfoService {
 
     @Override
-    public User findUser(String account) {
-        User user = null;
+    public MUser findUser(String account) {
+        MUser user = null;
         try {
             QueryRunner run = new QueryRunner(DB.getDataSource());
-            ResultSetHandler<User> h = new BeanHandler<>(User.class);
+            ResultSetHandler<MUser> h = new BeanHandler<>(MUser.class);
             user = run.query("SELECT * FROM usr where alias = ? ", h, account);
         } catch (SQLException ex) {
             Logger.getLogger(MyUserInfoService.class.getName()).log(Level.SEVERE, null, ex);
@@ -30,7 +30,7 @@ public class MyUserInfoService implements UserInfoService {
     }
 
     @Override
-    public User updateUser(org.zkoss.essentials.entity.User user) {
+    public MUser updateUser(org.zkoss.essentials.entity.User user) {
         //TODO
         return null;
     }

@@ -9,20 +9,11 @@ import java.util.ArrayList;
  *
  * @author odelarosa
  */
-public class Signo {
+public class MSigno {
 
-    private Timestamp fecha;
     private String nombre;
     private double valor;
     private String unidad;
-
-    public Timestamp getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Timestamp fecha) {
-        this.fecha = fecha;
-    }
 
     public String getNombre() {
         return nombre;
@@ -48,6 +39,6 @@ public class Signo {
         this.unidad = unidad;
     }
 
-    public static final Type LIST_TYPE = new TypeToken<ArrayList<Signo>>() {
+    public static final Type LIST_TYPE = new TypeToken<ArrayList<MSigno>>() {
     }.getType();
 }

@@ -1,5 +1,6 @@
 package com.delarosa.portal.zk;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
@@ -14,21 +15,31 @@ import org.zkoss.zul.Toolbarbutton;
  *
  * @author odelarosa
  */
-public abstract class SearchWindow extends Window {
-
+public abstract class DetSearchWindow extends Window {
+    private final ArrayList<?> results;
     private final ListModelList<Object> model = new ListModelList<>();
 
-    public SearchWindow(boolean addToolBar) {
+    public DetSearchWindow(boolean addToolBar, ArrayList<?> results) {
         super(addToolBar);
+        this.results = results;
         
-        Toolbarbutton toolbarbutton = new Toolbarbutton(null);
-        toolbarbutton.setIconSclass("z-icon-refresh fa-2x");
+        Toolbarbutton refresh = new Toolbarbutton(null);
+        Toolbarbutton back = new Toolbarbutton(null);
+
+        refresh.setIconSclass("z-icon-refresh fa-2x");
+        back.setIconSclass("z-icon-arrow-circle-o-left fa-2x");
         
-        toolbarbutton.addEventListener(Events.ON_CLICK, (Event t) -> {
+        refresh.addEventListener(Events.ON_CLICK, (Event t) -> {
             refresh();
         });
         
-        getToolbar().appendChild(toolbarbutton);
+        back.addEventListener(Events.ON_CLICK, (Event t) -> {
+            back();
+        });
+        
+        getToolbar().appendChild(refresh);
+        getToolbar().appendChild(back);
+
 
         getPanelLayout().newPanelChildren(getSearchTitle(), true, getSearchPanel());
         getPanelLayout().newPanelChildren(getResultTitle(), true, getResultPanel());
@@ -76,11 +87,22 @@ public abstract class SearchWindow extends Window {
         getModel().addAll(getResults());
     }
 
-    public abstract Collection<?> getResults();
+    public Collection<?> getResults(){
+        return results;
+    }
     
     public void open(Component component) {
         Center c = (Center)getParent();
         c.getChildren().clear();
         c.appendChild(component);
     }
+    
+    private void back() {
+        Center c = (Center)getParent();
+        c.getChildren().clear();
+        c.appendChild(backParent());
+    }
+    
+    public abstract Component backParent();
+
 }

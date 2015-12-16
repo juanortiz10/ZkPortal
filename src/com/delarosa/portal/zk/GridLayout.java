@@ -207,8 +207,9 @@ public class GridLayout extends Grid {
             lbl.setTooltiptext(toolTip);
             lbl.setStyle("cursor: help;" + lbl.getStyle());
         }
+        
         row.appendChild(ZKUtils.newCell(lbl));
-
+        
         if (component instanceof Cell) {
             row.appendChild(component);
         } else {

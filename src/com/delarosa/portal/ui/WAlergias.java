@@ -1,6 +1,7 @@
 package com.delarosa.portal.ui;
 
-import com.delarosa.portal.db.entity.Alergia;
+import com.delarosa.portal.authentication.TokenAuthenticationService;
+import com.delarosa.portal.db.entity.MAlergia;
 import com.delarosa.portal.utils.RestConn;
 import com.delarosa.portal.zk.Listhead;
 import com.delarosa.portal.zk.SearchWindow;
@@ -15,9 +16,9 @@ import org.zkoss.zul.ListitemRenderer;
  *
  * @author lama
  */
-public class Alergias extends SearchWindow {
+public class WAlergias extends SearchWindow {
 
-    public Alergias() {
+    public WAlergias() {
         super(false);
     }
 
@@ -28,7 +29,7 @@ public class Alergias extends SearchWindow {
 
     @Override
     public ListitemRenderer<?> getItemRenderer() {
-        return (Listitem lstm, Alergia a, int i) -> {
+        return (Listitem lstm, MAlergia a, int i) -> {
             final String tipo;
             switch (a.getTipo()) {
                 case "C":
@@ -79,7 +80,7 @@ public class Alergias extends SearchWindow {
     @Override
     public Collection<?> getResults() {
         GsonBuilder gsonBuilder = new GsonBuilder();
-        return gsonBuilder.create().fromJson(RestConn.getRestResponse("http://127.0.0.1:8000/pacientes/1/alergias"), Alergia.LIST_TYPE);
+        return gsonBuilder.create().fromJson(RestConn.getRestResponse("http://127.0.0.1:8000/pacientes/".concat(TokenAuthenticationService.getCurp().concat("/alergias"))), MAlergia.LIST_TYPE);
     }
 
 }

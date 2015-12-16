@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author odelarosa
  */
-public class Paciente {
+public class MPaciente {
 
     private String curp;
     private String apellido;
@@ -16,13 +16,13 @@ public class Paciente {
     private String apellido2;
     private String nombre;
     private String fechaNacimiento;
-    private List<Historia> historia = new ArrayList<>();
+    private List<MHistoria> historia = new ArrayList<>();
 
-    public List<Historia> getHistoria() {
+    public List<MHistoria> getHistoria() {
         return historia;
     }
 
-    public void setHistoria(List<Historia> historia) {
+    public void setHistoria(List<MHistoria> historia) {
         this.historia = historia;
     }
 

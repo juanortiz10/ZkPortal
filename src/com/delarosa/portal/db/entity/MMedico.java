@@ -9,7 +9,7 @@ package com.delarosa.portal.db.entity;
  *
  * @author tulio_93
  */
-public class Medico {
+public class MMedico {
     private String Nombre;
     private String cedula;
 

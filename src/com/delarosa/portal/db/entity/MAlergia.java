@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * @author lama
  */
-public class Alergia {
+public class MAlergia {
 
     private String nombre;
     private String tipo;
@@ -50,6 +50,6 @@ public class Alergia {
     public void setSeveridad(String severidad) {
         this.severidad = severidad;
     }
-    public static final Type LIST_TYPE = new TypeToken<ArrayList<Alergia>>() {
+    public static final Type LIST_TYPE = new TypeToken<ArrayList<MAlergia>>() {
     }.getType();
 }

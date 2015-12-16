@@ -1,6 +1,6 @@
 package com.delarosa.portal.ui;
 
-import com.delarosa.portal.authentication.MyAuthenticationService;
+import com.delarosa.portal.authentication.TokenAuthenticationService;
 import com.delarosa.portal.utils.CookieController;
 import org.zkoss.essentials.services.AuthenticationService;
 import org.zkoss.essentials.services.UserCredential;
@@ -23,13 +23,13 @@ import org.zkoss.zul.theme.Themes;
  *
  * @author odelarosa
  */
-public class UserPanel extends Div {
+public class WUserPanel extends Div {
 
-    private final AuthenticationService authService = new MyAuthenticationService();
+    private final AuthenticationService authService = new TokenAuthenticationService();
 
-    public UserPanel() {
+    public WUserPanel() {
         Menubar menubar = new Menubar();
-        Menu userMenu = new Menu(Sessions.getCurrent().getAttribute("account").toString());
+        Menu userMenu = new Menu(TokenAuthenticationService.getName());
         userMenu.setIconSclass("z-icon-user");
 
         Menupopup menupopup = new Menupopup();

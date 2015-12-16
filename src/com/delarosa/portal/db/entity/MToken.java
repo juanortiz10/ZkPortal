@@ -9,8 +9,26 @@ package com.delarosa.portal.db.entity;
  *
  * @author dsolano
  */
-public class Token {
+public class MToken {
     private String token;
+    private String curp;
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCurp() {
+        return curp;
+    }
+
+    public void setCurp(String curp) {
+        this.curp = curp;
+    }
 
     public String getToken() {
         return token;

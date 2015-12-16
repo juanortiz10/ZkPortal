@@ -5,23 +5,26 @@
  */
 package com.delarosa.portal.ui;
 
+import com.delarosa.portal.authentication.TokenAuthenticationService;
+
 /**
  *
  * @author lama
  */
-public class Intervenciones extends CodigosCIE {
+public class WDiagnosticos extends CodigosCIE {
 
-    public Intervenciones() {
+    public WDiagnosticos() {
         super();
     }
 
     @Override
     public String getItemName() {
-        return "Intervención";
+        return "Diagnóstico";
     }
 
     @Override
     public String getRestResponseURL() {
-        return "http://127.0.0.1:8000/pacientes/1/intervenciones";
+        return "http://127.0.0.1:8000/pacientes/".concat(TokenAuthenticationService.getCurp().concat("/diagnosticos"));
     }
+    
 }

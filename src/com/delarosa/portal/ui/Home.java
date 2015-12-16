@@ -1,7 +1,8 @@
 package com.delarosa.portal.ui;
 
-import com.delarosa.portal.db.entity.Paciente;
-import com.delarosa.portal.db.entity.Toma;
+import com.delarosa.portal.authentication.TokenAuthenticationService;
+import com.delarosa.portal.db.entity.MPaciente;
+import com.delarosa.portal.db.entity.MToma;
 import com.delarosa.portal.utils.RestConn;
 import com.delarosa.portal.zk.Chart;
 import com.delarosa.portal.zk.ChartBuilder;
@@ -36,9 +37,9 @@ public class Home extends Window {
     public Home() {
         super(false);
 
-        String json = RestConn.getRestResponse("http://127.0.0.1:8000/pacientes/1");
+        String json = RestConn.getRestResponse("http://127.0.0.1:8000/pacientes/".concat(TokenAuthenticationService.getCurp()));
 
-        Paciente paciente = new Gson().fromJson(json, Paciente.class);
+        MPaciente paciente = new Gson().fromJson(json, MPaciente.class);
 
         GridLayout gridLayout = new GridLayout();
 
@@ -69,10 +70,9 @@ public class Home extends Window {
         gridLayout.addRow("Nombre", nombre, "Apellido", apellido, "Apellido Materno", apellido2);
 
         getPanelLayout().newPanelChildren("Datos Generales", true, gridLayout);
+        json = RestConn.getRestResponse("http://127.0.0.1:8000/pacientes/".concat(TokenAuthenticationService.getCurp().concat("/todo_tomas_signos")));
 
-        json = RestConn.getRestResponse("http://127.0.0.1:8000/pacientes/1/tomas_signos");
-
-        List<Toma> tomas = new Gson().fromJson(json, Toma.LIST_TYPE);
+        List<MToma> tomas = new Gson().fromJson(json, MToma.LIST_TYPE);
 
         HashMap<String, List<Double>> map = new HashMap<>();
         HashMap<String, List<String>> map2 = new HashMap<>();

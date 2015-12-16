@@ -1,5 +1,6 @@
 package com.delarosa.portal.utils;
 
+import com.delarosa.portal.authentication.TokenAuthenticationService;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -28,7 +29,7 @@ public class RestConn {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
             HttpGet httpget = new HttpGet(restUrl+".json");
-            httpget.addHeader("Authorization", "Token ".concat(Sessions.getCurrent().getAttribute("token").toString()));
+            httpget.addHeader("Authorization", "Token ".concat(TokenAuthenticationService.getToken()));
 
             System.out.println("Executing request " + httpget.getRequestLine());
 
@@ -86,4 +87,5 @@ public class RestConn {
         
         return json;
     }
+    
 }

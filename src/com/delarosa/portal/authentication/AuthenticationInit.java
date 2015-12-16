@@ -13,7 +13,7 @@ import org.zkoss.zk.ui.util.Initiator;
  */
 public class AuthenticationInit implements Initiator {
 
-    private final AuthenticationService authService = new MyAuthenticationService();
+    private final AuthenticationService authService = new TokenAuthenticationService();
 
     @Override
     public void doInit(Page page, Map<String, Object> map) throws Exception {

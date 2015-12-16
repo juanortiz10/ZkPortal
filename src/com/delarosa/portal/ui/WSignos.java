@@ -1,7 +1,8 @@
 package com.delarosa.portal.ui;
 
-import com.delarosa.portal.db.entity.Signo;
-import com.delarosa.portal.db.entity.Toma;
+import com.delarosa.portal.authentication.TokenAuthenticationService;
+import com.delarosa.portal.db.entity.MSigno;
+import com.delarosa.portal.db.entity.MToma;
 import com.delarosa.portal.utils.RestConn;
 import com.delarosa.portal.zk.GridLayout;
 import com.delarosa.portal.zk.Listhead;
@@ -20,12 +21,12 @@ import org.zkoss.zul.ListitemRenderer;
  *
  * @author odelarosa
  */
-public class Signos extends SearchWindow {
+public class WSignos extends SearchWindow {
 
     private Datebox fechaIni;
     private Datebox fechaFin;
 
-    public Signos() {
+    public WSignos() {
         super(true);
     }
 
@@ -40,8 +41,7 @@ public class Signos extends SearchWindow {
 
     @Override
     public ListitemRenderer<?> getItemRenderer() {
-        return (Listitem lstm, Signo t, int i) -> {
-            lstm.appendChild(new Listcell(Index.SDF.format(t.getFecha())));
+        return (Listitem lstm, MSigno t, int i) -> {
             lstm.appendChild(new Listcell(t.getNombre()));
             lstm.appendChild(new Listcell(Double.toString(t.getValor())));
             lstm.appendChild(new Listcell(t.getUnidad()));
@@ -51,7 +51,6 @@ public class Signos extends SearchWindow {
     @Override
     public Listhead getListHeader() {
         Listhead listhead = new Listhead();
-        listhead.newHeader("Fecha");
         listhead.newHeader("Nombre");
         listhead.newHeader("Valor");
         listhead.newHeader("Unidad");
@@ -60,13 +59,12 @@ public class Signos extends SearchWindow {
 
     @Override
     public Collection<?> getResults() {
-        String json = RestConn.getRestResponse("http://127.0.0.1:8000/pacientes/1/tomas_signos");
-        List<Toma> tomas = new Gson().fromJson(json, Toma.LIST_TYPE);
-        List<Signo> signos = new ArrayList<>();
+        String json = RestConn.getRestResponse("http://127.0.0.1:8000/pacientes/".concat(TokenAuthenticationService.getCurp().concat("/tomas_signos")));
+        List<MToma> tomas = new Gson().fromJson(json, MToma.LIST_TYPE);
+        List<MSigno> signos = new ArrayList<>();
 
-        for (Toma toma : tomas) {
-            for (Signo signo : toma.getSignos()) {
-                signo.setFecha(toma.getFecha());
+        for (MToma toma : tomas) {
+            for (MSigno signo : toma.getSignos()) {
                 signos.add(signo);
             }
         }

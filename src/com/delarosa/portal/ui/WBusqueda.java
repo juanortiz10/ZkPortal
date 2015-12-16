@@ -29,7 +29,7 @@ import org.zkoss.zul.Textbox;
  *
  * @author odelarosa
  */
-public class Busqueda extends SearchWindow {
+public class WBusqueda extends SearchWindow {
 
     private Textbox textbox;
     private static String[] OPERATORS = new String[]{" AND ", " OR ", "+"};
@@ -109,7 +109,7 @@ public class Busqueda extends SearchWindow {
 
     }
 
-    public Busqueda() {
+    public WBusqueda() {
         super(true);
     }
 
