@@ -45,12 +45,12 @@ public class Home extends Window {
 
         Textbox nombre = new Textbox(paciente.getNombre());
         Textbox apellido = new Textbox(paciente.getApellido());
-        Textbox apellido2 = new Textbox(paciente.getApellido2());
+        Textbox apellido2 = new Textbox(paciente.getApellidoSegundo());
         Textbox sexo = new Textbox("H".equals(paciente.getSexo()) ? "Hombre" : "Mujer");
-        nombre.setDisabled(true);
-        apellido.setDisabled(true);
-        apellido2.setDisabled(true);
-        sexo.setDisabled(true);
+        nombre.setReadonly(true);
+        apellido.setReadonly(true);
+        apellido2.setReadonly(true);
+        sexo.setReadonly(true);
 
         try {
             Date date = SDF.parse(paciente.getFechaNacimiento());
@@ -60,9 +60,9 @@ public class Home extends Window {
 
             gridLayout.addRow("Sexo", sexo, "Fecha de Nacimiento", datebox, "Edad", anios);
             
-            datebox.setDisabled(true);
+            datebox.setReadonly(true);
             datebox.setButtonVisible(false);
-            anios.setDisabled(true);
+            anios.setReadonly(true);
         } catch (ParseException ex) {
             Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
         }

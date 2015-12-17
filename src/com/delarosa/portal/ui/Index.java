@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import org.apache.commons.lang3.StringUtils;
 import org.zkoss.essentials.services.AuthenticationService;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.Clients;
@@ -85,7 +86,8 @@ public class Index extends Window {
             Notification.showWarning("Usuario y/o contraseña invália");
             return;
         }
-        
+        Sessions.getCurrent().setAttribute("external", "N");
+
         Executions.getCurrent().sendRedirect("/main.zul");
     }
 

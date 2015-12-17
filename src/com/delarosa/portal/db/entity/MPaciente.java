@@ -13,7 +13,7 @@ public class MPaciente {
     private String apellido;
     private String segundoNombre;
     private String sexo;
-    private String apellido2;
+    private String apellidoSegundo;
     private String nombre;
     private String fechaNacimiento;
     private List<MHistoria> historia = new ArrayList<>();
@@ -58,12 +58,12 @@ public class MPaciente {
         this.sexo = sexo;
     }
 
-    public String getApellido2() {
-        return apellido2;
+    public String getApellidoSegundo() {
+        return apellidoSegundo;
     }
 
-    public void setApellido2(String apellido2) {
-        this.apellido2 = apellido2;
+    public void setApellidoSegundo(String apellidoSegundo) {
+        this.apellidoSegundo = apellidoSegundo;
     }
 
     public String getNombre() {

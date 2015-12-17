@@ -61,6 +61,11 @@ public class RestConn {
         
         try {
              HttpPost httppost = new HttpPost(restUrl);
+             
+             if(TokenAuthenticationService.getToken() != null){
+                httppost.addHeader("Authorization", "Token ".concat(TokenAuthenticationService.getToken()));
+             }
+             
              httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
              
              ResponseHandler<String> responseHandler = (final HttpResponse response) -> {

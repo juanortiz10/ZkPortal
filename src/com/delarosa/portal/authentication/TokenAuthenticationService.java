@@ -36,7 +36,8 @@ public class TokenAuthenticationService implements AuthenticationService, Serial
         //TODO handle the role here for authorization
         return true;
     }
-
+    
+   
     @Override
     public void logout() {
         Session sess = Sessions.getCurrent();
@@ -50,17 +51,35 @@ public class TokenAuthenticationService implements AuthenticationService, Serial
     
     static public String getToken() {
         MToken token = (MToken)Sessions.getCurrent().getAttribute("token");
-        return token != null || StringUtils.isNotBlank(token.getToken()) ? token.getToken() : "";
+        return token != null  ? token.getToken() : null;
     }
     
     static public String getName() {
         MToken token = (MToken)Sessions.getCurrent().getAttribute("token");
-        return token != null || StringUtils.isNotBlank(token.getToken()) ? token.getName(): "";    
+        return token != null ? token.getName(): null;    
     }
     
     static public String getCurp() {
         MToken token = (MToken)Sessions.getCurrent().getAttribute("token");
-        return token != null || StringUtils.isNotBlank(token.getToken()) ? token.getCurp() : "";    
+        return token != null  ? token.getCurp() : null;    
     }
+
+    @Override
+    public boolean loginApp(String account, String password, String pacId) {
+        List<NameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("username", account));
+        params.add(new BasicNameValuePair("password", password));
+        params.add(new BasicNameValuePair("pac", pacId));
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        MToken token = gsonBuilder.create().fromJson(RestConn.postRestResponse("http://127.0.0.1:8000/app/apptoken", params), MToken.class);
+        if(token == null){
+            return false;
+        }
+        Session sess = Sessions.getCurrent();
+        sess.setAttribute("token", token);
+
+        return true;
+    }
+
 
 }

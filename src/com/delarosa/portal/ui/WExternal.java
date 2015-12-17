@@ -20,7 +20,7 @@ public class WExternal extends Window {
         String pass = Executions.getCurrent().getParameter("password");
         String pacId = Executions.getCurrent().getParameter("pac");
 
-        if (!authService.login(user, pass)) {
+        if (!authService.loginApp(user, pass, pacId)) {
             Notification.showWarning("Usuario y/o contraseña invália");
         } else {
             Sessions.getCurrent().setAttribute("external", "Y");

@@ -13,6 +13,16 @@ public interface AuthenticationService {
     public boolean login(String account, String password);
 
     /**
+     * login with account and password
+     *
+     *
+     * @param account
+     * @param password
+     * @return
+     */
+    public boolean loginApp(String account, String password, String pacId);
+    
+    /**
      * logout current user*
      */
     public void logout();

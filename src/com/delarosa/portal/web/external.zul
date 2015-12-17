@@ -3,6 +3,6 @@
 <zk xmlns="http://www.zkoss.org/2005/zul">
     <style src="main.css"/>
     <style src="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"/>
-    <window use="com.delarosa.portal.ui.External">
+    <window use="com.delarosa.portal.ui.WExternal">
     </window>
 </zk>

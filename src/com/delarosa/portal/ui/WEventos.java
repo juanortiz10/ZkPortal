@@ -7,7 +7,11 @@ import com.delarosa.portal.zk.GridLayout;
 import com.delarosa.portal.zk.Listhead;
 import com.delarosa.portal.zk.SearchWindow;
 import com.google.gson.GsonBuilder;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -35,7 +39,9 @@ public class WEventos extends SearchWindow {
     public Component getSearchPanel() {
         GridLayout gridLayout = new GridLayout();
         fechaIni = new Datebox();
+        fechaIni.setValue(new Date());
         fechaFin = new Datebox();
+        fechaFin.setValue(new Date());
         gridLayout.addRow("Fecha Inicial", fechaIni, "Fecha Final", fechaFin, null, null);
         return gridLayout;
     }
@@ -51,12 +57,9 @@ public class WEventos extends SearchWindow {
             new Listcell(t.getEspecialidad()).setParent(lstm);
             new Listcell(t.getTipo()).setParent(lstm);
             new Listcell(t.getMotivo()).setParent(lstm);
-            lstm.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
-			@Override
-			public void onEvent(final Event event) throws Exception {
-                            open(new WEventosDet(t.getId()));
-			}
-		});
+            lstm.addEventListener(Events.ON_CLICK, (final Event event) -> {
+                open(new WEventosDet(t.getId()));
+            });
         };
     }
 
@@ -81,7 +84,10 @@ public class WEventos extends SearchWindow {
         url.append("http://127.0.0.1:8000/pacientes/");
         url.append(TokenAuthenticationService.getCurp());
         url.append("/eventos");
-        return gsonBuilder.create().fromJson(RestConn.getRestResponse(url.toString()), MEvento.LIST_TYPE);
+        List<MEvento> eventos = gsonBuilder.create().fromJson(RestConn.getRestResponse(url.toString()), MEvento.LIST_TYPE);
+        eventos = eventos.stream().filter(p -> p.getFechaInicio().after(fechaIni.getValue()) || p.getFechaFin().after(fechaFin.getValue())).collect(Collectors.toList());
+        
+        return eventos;
     }
 
 }

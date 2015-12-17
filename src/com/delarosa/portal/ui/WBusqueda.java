@@ -1,8 +1,15 @@
 package com.delarosa.portal.ui;
 
+import com.delarosa.portal.authentication.TokenAuthenticationService;
+import com.delarosa.portal.db.entity.MEvento;
+import com.delarosa.portal.db.entity.MReceta;
+import com.delarosa.portal.utils.RestConn;
 import com.delarosa.portal.zk.GridLayout;
 import com.delarosa.portal.zk.Listhead;
 import com.delarosa.portal.zk.SearchWindow;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,6 +22,8 @@ import java.util.Collection;
 import java.util.List;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.zkoss.zhtml.Text;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
@@ -128,8 +137,8 @@ public class WBusqueda extends SearchWindow {
 
     @Override
     public ListitemRenderer<?> getItemRenderer() {
-        return (Listitem lstm, MyClass t, int i) -> {
-            Timestamp date = t.getDate();
+        return (Listitem lstm, Result t, int i) -> {
+            Timestamp date = t.getFecha();
 
             if (date == null) {
                 lstm.appendChild(new Listcell());
@@ -137,7 +146,7 @@ public class WBusqueda extends SearchWindow {
                 lstm.appendChild(new Listcell(new SimpleDateFormat("dd/MM/yyyy").format(date)));
             }
             String text = null;
-            switch (t.getType()) {
+            switch (t.getTipo()) {
                 case "D":
                     text = "Diagnóstico";
                     break;
@@ -155,7 +164,7 @@ public class WBusqueda extends SearchWindow {
                     break;
             }
             lstm.appendChild(new Listcell(text));
-            Text hl = new Text(t.getHl());
+            Text hl = new Text(t.getHighlight());
             hl.setEncode(false);
 
             Listcell listcell = new Listcell();
@@ -178,95 +187,59 @@ public class WBusqueda extends SearchWindow {
      * @return
      */
     @Override
-    public Collection<MyClass> getResults() {
-        List<MyClass> list = new ArrayList<>();
+    public Collection<Result> getResults() {
+        List<Result> list = new ArrayList<>();
 
         if (textbox != null) {
             if (StringUtils.isNoneBlank(textbox.getText())) {
-
-                try {
-
-                    Class.forName("org.postgresql.Driver");
-
-                } catch (ClassNotFoundException e) {
-
-                    System.out.println("Where is your PostgreSQL JDBC Driver? "
-                            + "Include in your library path!");
-
-                }
-
-                Connection connection = null;
-                PreparedStatement ps = null;
-                ResultSet rs = null;
-
-                try {
-
-                    connection = DriverManager.getConnection("jdbc:postgresql://192.168.11.190:5432/cumulus", "ecaresoft", null);
-
-                    ps = connection.prepareStatement(SQL.toString());
-
-                    String text = StringUtils.replaceEach(textbox.getText(), OPERATORS, REPLACE);
-
-                    ps.setString(1, text);
-                    ps.setString(2, text);
-                    ps.setString(3, text);
-                    ps.setString(4, text);
-                    ps.setString(5, text);
-                    ps.setString(6, text);
-                    ps.setString(7, text);
-                    ps.setString(8, text);
-                    ps.setString(9, text);
-                    ps.setString(10, text);
-
-                    rs = ps.executeQuery();
-
-                    while (rs.next()) {
-                        MyClass myClass = new MyClass();
-                        myClass.setHl(rs.getString(3));
-                        myClass.setType(rs.getString(1));
-                        myClass.setDate(rs.getTimestamp(4));
-                        list.add(myClass);
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } finally {
-                    DbUtils.closeQuietly(connection, ps, rs);
-                }
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                StringBuilder url = new StringBuilder();
+                url.append("http://127.0.0.1:8000/pacientes/");
+                url.append(TokenAuthenticationService.getCurp());
+                url.append("/busqueda");
+                List<NameValuePair> params = new ArrayList<>();
+                params.add(new BasicNameValuePair("query", textbox.getText()));
+                list = gsonBuilder.create().fromJson(RestConn.postRestResponse(url.toString(), params), Result.LIST_TYPE);
+              
             }
         }
 
         return list;
     }
 
-    private static class MyClass {
+    private static class Result {
 
-        private String type;
-        private String hl;
-        private Timestamp date;
+        private String tipo;
+        private String highlight;
+        private Timestamp fecha;
 
-        public Timestamp getDate() {
-            return date;
+        public Timestamp getFecha() {
+            return fecha;
         }
 
-        public void setDate(Timestamp date) {
-            this.date = date;
+        public void setFecha(Timestamp fecha) {
+            this.fecha = fecha;
         }
 
-        public String getType() {
-            return type;
+        public String getTipo() {
+            return tipo;
         }
 
-        public void setType(String type) {
-            this.type = type;
+        public void setTipo(String tipo) {
+            this.tipo = tipo;
         }
 
-        public String getHl() {
-            return hl;
+        public String getHighlight() {
+            return highlight;
         }
 
-        public void setHl(String hl) {
-            this.hl = hl;
+        public void setHighlight(String highlight) {
+            this.highlight = highlight;
         }
+        
+        public static final Type LIST_TYPE = new TypeToken<ArrayList<Result>>() {
+        }.getType();
+
     }
 
 }

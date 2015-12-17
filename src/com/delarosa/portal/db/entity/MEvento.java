@@ -9,7 +9,7 @@ import java.util.ArrayList;
  *
  * @author tulio_93
  */
-public class MEvento {
+public class MEvento  {
     private String id;
     private Timestamp fechaInicio;
     private Timestamp fechaFin;
