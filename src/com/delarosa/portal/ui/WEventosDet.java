@@ -9,7 +9,7 @@ import com.delarosa.portal.authentication.TokenAuthenticationService;
 import com.delarosa.portal.db.entity.MCuestionario;
 import com.delarosa.portal.db.entity.MEventoDet;
 import com.delarosa.portal.db.entity.MDiagnostico;
-import com.delarosa.portal.db.entity.Intervencion;
+import com.delarosa.portal.db.entity.MIntervencion;
 import com.delarosa.portal.db.entity.MReceta;
 import com.delarosa.portal.db.entity.MToma;
 import com.delarosa.portal.utils.RestConn;
@@ -57,12 +57,9 @@ class WEventosDet extends DetWindow {
         
         ListitemRenderer<MToma> toma = (Listitem lstm, MToma t, int i) -> {
             lstm.appendChild(new Listcell(Index.SDF.format(t.getFecha())));
-            lstm.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
-			@Override
-			public void onEvent(final Event event) throws Exception {
-                            open(new WSignosEvento(t.getSignos(), id));
-			}
-		});
+            lstm.addEventListener(Events.ON_CLICK, (final Event event) -> {
+                open(new WSignosEvento(t.getSignos(), id));
+            });
         };
         renders.add(toma);
         
@@ -70,12 +67,9 @@ class WEventosDet extends DetWindow {
         ListitemRenderer<MReceta> receta = (Listitem lstm, MReceta t, int i) -> {
             lstm.appendChild(new Listcell(Index.SDF.format(t.getFecha())));
             lstm.appendChild(new Listcell(t.getNotas()));
-            lstm.addEventListener(Events.ON_CLICK, new EventListener<Event>() {
-			@Override
-			public void onEvent(final Event event) throws Exception {
-                            open(new WMedicamentosEvento(t.getMedicamentos(), id));
-			}
-		});
+            lstm.addEventListener(Events.ON_CLICK, (final Event event) -> {
+                open(new WMedicamentosEvento(t.getMedicamentos(), id));
+            });
         };
         renders.add(receta);
         
@@ -87,7 +81,7 @@ class WEventosDet extends DetWindow {
         };
         renders.add(diac);
       
-        ListitemRenderer<Intervencion> inter = (Listitem lstm, Intervencion t, int i) -> {
+        ListitemRenderer<MIntervencion> inter = (Listitem lstm, MIntervencion t, int i) -> {
             lstm.appendChild(new Listcell(Index.SDF.format(t.getFecha())));
             lstm.appendChild(new Listcell(t.getNombre()));
             lstm.appendChild(new Listcell(t.getCodigo()));
@@ -110,7 +104,7 @@ class WEventosDet extends DetWindow {
         ArrayList<Listhead> headers = new ArrayList<>();
 
         Listhead tomas = new Listhead();
-        tomas.newHeader("Fecha").setHflex("min");
+        tomas.newHeader("Fecha").setHflex("max");
         headers.add(tomas);
         
         Listhead receta = new Listhead();

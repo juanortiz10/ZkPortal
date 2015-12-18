@@ -2,7 +2,6 @@ package com.delarosa.portal.db.entity;
 
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**

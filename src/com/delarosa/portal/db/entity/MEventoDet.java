@@ -19,7 +19,7 @@ public class MEventoDet {
     private ArrayList<MToma> tomas;
     private ArrayList<MReceta> recetas;
     private ArrayList<MDiagnostico> diagnosticos;
-    private ArrayList<Intervencion> intervenciones;
+    private ArrayList<MIntervencion> intervenciones;
     private ArrayList<MCuestionario> cuestionarios;
 
     public String getId() {
@@ -110,11 +110,11 @@ public class MEventoDet {
         this.diagnosticos = diagnosticos;
     }
 
-    public ArrayList<Intervencion> getIntervenciones() {
+    public ArrayList<MIntervencion> getIntervenciones() {
         return intervenciones;
     }
 
-    public void setIntervenciones(ArrayList<Intervencion> intervenciones) {
+    public void setIntervenciones(ArrayList<MIntervencion> intervenciones) {
         this.intervenciones = intervenciones;
     }
 

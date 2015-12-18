@@ -11,7 +11,6 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.Center;
-import org.zkoss.zul.Hbox;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.ListitemRenderer;
@@ -89,6 +88,7 @@ public abstract class DetWindow extends Window {
     }
     
     private void setPanels(){
+        int columnas = 2;
         ArrayList<Listbox> listboxes = new ArrayList<>();
         for (int i = 0; i < models.size(); i++) {
             Listbox listbox = new Listbox();
@@ -101,7 +101,7 @@ public abstract class DetWindow extends Window {
             listboxes.add(listbox);
         }
         
-        int padding = (models.size() % 3) - 3;
+        int padding = (models.size() % columnas) - columnas;
         ArrayList<String> titles = getResultTitles();
         while(padding < 0){
             titles.add(null);
@@ -109,8 +109,8 @@ public abstract class DetWindow extends Window {
             padding++;
         }
         
-        for(int i = 0; i <= (int)Math.ceil(models.size()/3); i++){
-            getPanelLayout().newPanelChildrenRow(titles.get(0 + (3*i)), listboxes.get(0 + (3*i)), titles.get(1 + (3*i)), listboxes.get(1 + (3*i)), titles.get(2 + (3*i)), listboxes.get(2 + (3*i)));        
+        for(int i = 0; i <= (int)Math.ceil(models.size()/columnas); i++){
+            getPanelLayout().newPanelChildrenRow(titles.get(0 + (columnas*i)), listboxes.get(0 + (columnas*i)), titles.get(1 + (columnas*i)), listboxes.get(1 + (columnas*i)));        
         }
     }
 

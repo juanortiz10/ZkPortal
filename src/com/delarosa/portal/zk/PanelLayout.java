@@ -9,7 +9,7 @@ import org.zkoss.zul.Space;
 
 /**
  *
- * @author odelarosa
+ * @author dsolano
  */
 public final class PanelLayout extends Panel {
 
@@ -42,7 +42,7 @@ public final class PanelLayout extends Panel {
         return pChildren;
     }
     
-    public Panelchildren newPanelChildrenRow(String title1, Component component1, String title2, Component component2, String title3, Component component3){
+    public Panelchildren newPanelChildrenRow(String title1, Component component1, String title2, Component component2){
         Panel panelP = newPanel(null, false);
         panelP.setWidth("95%");
         Panelchildren pChildren = new Panelchildren();
@@ -69,18 +69,6 @@ public final class PanelLayout extends Panel {
             ZKUtils.append(pChildren2, component2);
             grid.appendChild(panel2);
         }
-        
-        if(component3 != null){
-            Panel panel3 = newPanel(title3, false);
-            panel3.setWidth("100%");
-            Panelchildren pChildren3 = new Panelchildren();
-            panel3.appendChild(pChildren3);
-            pChildren3.setStyle("overflow:auto;");
-            ZKUtils.append(pChildren3, component3);
-            grid.appendChild(panel3);
-        }
-        
-        
         
         return pChildren;
 

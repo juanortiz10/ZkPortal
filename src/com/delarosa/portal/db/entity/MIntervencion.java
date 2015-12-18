@@ -11,7 +11,7 @@ import java.sql.Timestamp;
  *
  * @author dsolano
  */
-public class Intervencion {
+public class MIntervencion {
     private Timestamp fecha;
     private String nombre;
     private String codigo;

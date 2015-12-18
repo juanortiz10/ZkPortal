@@ -3,30 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/db/entity/Diagnostico.java</file>
-            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/ui/Signos.java</file>
-            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/ui/External.java</file>
-            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/ui/Index.java</file>
-            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/ui/Alergias.java</file>
-            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/ui/Home.java</file>
-            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/db/entity/Toma.java</file>
-            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/ui/EventosDet.java</file>
-            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/zk/DetWindow.java</file>
-            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/utils/RestConn.java</file>
-            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/db/entity/EventoDet.java</file>
-            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/ui/Busqueda.java</file>
-            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/JettyZk.java</file>
-            <file>file:/home/dsolano/ZkPortal/src/org/zkoss/essentials/services/AuthenticationService.java</file>
-            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/ui/Main.java</file>
-            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/ui/Medicamentos.java</file>
             <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/zk/SearchWindow.java</file>
-            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/ui/Intervenciones.java</file>
-            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/ui/Diagnosticos.java</file>
-            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/ui/UserPanel.java</file>
-            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/ui/Eventos.java</file>
+            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/ui/Index.java</file>
+            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/ui/Home.java</file>
+            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/ui/WEventos.java</file>
+            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/ui/WEventosDet.java</file>
             <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/authentication/TokenAuthenticationService.java</file>
-            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/db/entity/Intervencion.java</file>
-            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/ui/Recetas.java</file>
+            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/zk/DetWindow.java</file>
+            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/db/entity/MReceta.java</file>
+            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/ui/WBusqueda.java</file>
+            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/zk/Window.java</file>
+            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/zk/PanelLayout.java</file>
         </group>
     </open-files>
 </project-private>

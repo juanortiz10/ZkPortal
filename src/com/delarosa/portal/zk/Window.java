@@ -1,5 +1,7 @@
 package com.delarosa.portal.zk;
 
+import com.delarosa.portal.authentication.TokenAuthenticationService;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Center;
 import org.zkoss.zul.North;
@@ -20,26 +22,30 @@ public class Window extends org.zkoss.zul.Window {
     }
 
     public Window(boolean addToolBar) {
+        if(TokenAuthenticationService.getToken() != null){
 
-        Borderlayout borderlayout = new Borderlayout();
+            Borderlayout borderlayout = new Borderlayout();
 
-        borderlayout.appendChild(center);
+            borderlayout.appendChild(center);
 
-        if (addToolBar) {
-            North north = new North();
-            borderlayout.appendChild(north);
-            north.appendChild(toolbar);
-            toolbar.setAlign("end");
+            if (addToolBar) {
+                North north = new North();
+                borderlayout.appendChild(north);
+                north.appendChild(toolbar);
+                toolbar.setAlign("end");
+            }
+
+            center.appendChild(panelLayout);
+            panelLayout.setHflex("true");
+            panelLayout.setVflex("true");
+
+            appendChild(borderlayout);
+
+            setWidth("100%");
+            setHeight("100%");
+        }else{
+            Executions.getCurrent().sendRedirect("/index.zul");
         }
-
-        center.appendChild(panelLayout);
-        panelLayout.setHflex("true");
-        panelLayout.setVflex("true");
-        
-        appendChild(borderlayout);
-        
-        setWidth("100%");
-        setHeight("100%");
     }
 
     public PanelLayout getPanelLayout() {

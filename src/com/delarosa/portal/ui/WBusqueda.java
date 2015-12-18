@@ -38,84 +38,7 @@ import org.zkoss.zul.Textbox;
  * @author odelarosa
  */
 public class WBusqueda extends SearchWindow {
-
     private Textbox textbox;
-    private static String[] OPERATORS = new String[]{" AND ", " OR ", "+"};
-    private static String[] REPLACE = new String[]{"&", "|", "&"};
-    private static final StringBuilder SQL = new StringBuilder();
-
-    static {
-        SQL.append("    SELECT                                                                                                  	");
-        SQL.append("        'D' as tipo,                                                                                        	");
-        SQL.append("        id,                                                                                                 	");
-        SQL.append("        ts_headline('spanish',                                                                              	");
-        SQL.append("        codigo || ' ' || nombre,                                                                            	");
-        SQL.append("        to_tsquery('spanish',                                                                               	");
-        SQL.append("        ?)) as highlight,                                                                        	");
-        SQL.append("        fecha                                                                                               	");
-        SQL.append("    FROM                                                                                                    	");
-        SQL.append("        pacientes_diagnostico                                                                               	");
-        SQL.append("    WHERE                                                                                                   	");
-        SQL.append("        paciente_id = 1                                                                                     	");
-        SQL.append("        and to_tsvector('spanish', codigo || ' ' || nombre) @@ plainto_tsquery('spanish', ?)     	");
-        SQL.append("    UNION                                                                                                   	");
-        SQL.append("    SELECT                                                                                                  	");
-        SQL.append("        'M' as tipo,                                                                                        	");
-        SQL.append("        id,                                                                                                 	");
-        SQL.append("        ts_headline('spanish',                                                                              	");
-        SQL.append("        codigo || ' ' || nombre,                                                                            	");
-        SQL.append("        to_tsquery('spanish',                                                                               	");
-        SQL.append("        ?)) as highlight,                                                                        	");
-        SQL.append("        null                                                                                                	");
-        SQL.append("    FROM                                                                                                    	");
-        SQL.append("        pacientes_medicamento                                                                               	");
-        SQL.append("    WHERE                                                                                                   	");
-        SQL.append("        paciente_id = 1                                                                                     	");
-        SQL.append("        and to_tsvector('spanish', codigo || ' ' || nombre) @@ plainto_tsquery('spanish', ?)     	");
-        SQL.append("    UNION                                                                                                   	");
-        SQL.append("    SELECT                                                                                                  	");
-        SQL.append("        'A' as tipo,                                                                                        	");
-        SQL.append("        id,                                                                                                 	");
-        SQL.append("        ts_headline('spanish',                                                                              	");
-        SQL.append("        nombre,                                                                                             	");
-        SQL.append("        to_tsquery('spanish',                                                                               	");
-        SQL.append("        ?)) as highlight,                                                                        	");
-        SQL.append("        null                                                                                                	");
-        SQL.append("    FROM                                                                                                    	");
-        SQL.append("        pacientes_alergia                                                                                   	");
-        SQL.append("    WHERE                                                                                                   	");
-        SQL.append("        paciente_id = 1                                                                                     	");
-        SQL.append("        and to_tsvector('spanish', nombre) @@ plainto_tsquery('spanish', ?)                      	");
-        SQL.append("    UNION                                                                                                   	");
-        SQL.append("    SELECT                                                                                                  	");
-        SQL.append("        'I' as tipo,                                                                                        	");
-        SQL.append("        id,                                                                                                 	");
-        SQL.append("        ts_headline('spanish',                                                                              	");
-        SQL.append("        codigo || ' ' || nombre,                                                                            	");
-        SQL.append("        to_tsquery('spanish',                                                                               	");
-        SQL.append("        ?)) as highlight,                                                                     	");
-        SQL.append("        fecha                                                                                               	");
-        SQL.append("    FROM                                                                                                    	");
-        SQL.append("        pacientes_intervencion                                                                              	");
-        SQL.append("    WHERE                                                                                                   	");
-        SQL.append("        paciente_id = 1                                                                                     	");
-        SQL.append("        and to_tsvector('spanish', codigo || ' ' || nombre) @@ plainto_tsquery('spanish', ?)  	");
-        SQL.append("    UNION                                                                                                   	");
-        SQL.append("    SELECT                                                                                                  	");
-        SQL.append("        'E' as tipo,                                                                                        	");
-        SQL.append("        id,                                                                                                 	");
-        SQL.append("        ts_headline('spanish',                                                                              	");
-        SQL.append("        motivo,                                                                                             	");
-        SQL.append("        to_tsquery('spanish',                                                                               	");
-        SQL.append("        ?)) as highlight,                                                                         	");
-        SQL.append("        fecha                                                                                               	");
-        SQL.append("    FROM                                                                                                    	");
-        SQL.append("        pacientes_evento                                                                                    	");
-        SQL.append("    WHERE                                                                                                   	");
-        SQL.append("        paciente_id = 1                                                                                     	");
-        SQL.append("        and to_tsvector('spanish', motivo) @@ plainto_tsquery('spanish', ?)                       	");
-
-    }
 
     public WBusqueda() {
         super(true);
@@ -204,7 +127,7 @@ public class WBusqueda extends SearchWindow {
             }
         }
 
-        return list;
+        return list != null ? list : new ArrayList<>();
     }
 
     private static class Result {
