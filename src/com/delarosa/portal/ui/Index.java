@@ -83,7 +83,7 @@ public class Index extends Window {
         ZKUtils.notNull(pass);
 
         if (!authService.login(user.getText(), pass.getText())) {
-            Notification.showWarning("Usuario y/o contraseña invália");
+            Notification.showWarning("Usuario y/o contraseña inválida");
             return;
         }
         Sessions.getCurrent().setAttribute("external", "N");

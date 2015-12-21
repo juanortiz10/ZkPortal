@@ -13,6 +13,7 @@ import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
@@ -22,14 +23,19 @@ import org.apache.http.util.EntityUtils;
  * @author odelarosa
  */
 public class RestConn {
-
-    public static String getRestResponse(String restUrl) {
+    public static String url = "http://192.168.11.139:8000/";
+    
+    public static String getRestResponse(String restUrl, List<NameValuePair> params) {
         String test = null;
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
-            HttpGet httpget = new HttpGet(restUrl+".json");
+             if(params != null){
+                 String getParams = URLEncodedUtils.format(params, "utf-8");
+                 restUrl = restUrl.concat("/?").concat(getParams);
+             }
+            HttpGet httpget = new HttpGet(RestConn.url+restUrl);
             httpget.addHeader("Authorization", "Token ".concat(TokenAuthenticationService.getToken()));
-
+           
             System.out.println("Executing request " + httpget.getRequestLine());
 
             // Create a custom response handler
@@ -60,7 +66,7 @@ public class RestConn {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         
         try {
-             HttpPost httppost = new HttpPost(restUrl);
+             HttpPost httppost = new HttpPost(RestConn.url+restUrl);
              
              if(TokenAuthenticationService.getToken() != null){
                 httppost.addHeader("Authorization", "Token ".concat(TokenAuthenticationService.getToken()));

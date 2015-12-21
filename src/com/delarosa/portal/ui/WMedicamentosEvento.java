@@ -6,7 +6,6 @@
 package com.delarosa.portal.ui;
 
 import com.delarosa.portal.db.entity.MMedicamento;
-import com.delarosa.portal.db.entity.MSigno;
 import com.delarosa.portal.zk.DetSearchWindow;
 import com.delarosa.portal.zk.Listhead;
 import java.util.ArrayList;

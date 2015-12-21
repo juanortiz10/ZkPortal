@@ -6,7 +6,6 @@ import com.google.gson.GsonBuilder;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.zkoss.essentials.services.AuthenticationService;
@@ -19,14 +18,14 @@ import org.zkoss.zk.ui.Sessions;
  * @author Omar
  */
 public class TokenAuthenticationService implements AuthenticationService, Serializable {
-
+    
     @Override
     public boolean login(String account, String password) {
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("username", account));
         params.add(new BasicNameValuePair("password", password));
         GsonBuilder gsonBuilder = new GsonBuilder();
-        MToken token = gsonBuilder.create().fromJson(RestConn.postRestResponse("http://127.0.0.1:8000/login", params), MToken.class);
+        MToken token = gsonBuilder.create().fromJson(RestConn.postRestResponse("auth/login", params), MToken.class);
         if(token == null){
             return false;
         }
@@ -65,18 +64,19 @@ public class TokenAuthenticationService implements AuthenticationService, Serial
     }
 
     @Override
-    public boolean loginApp(String account, String password, String pacId) {
+    public boolean loginApp(String token, String curp) {
+        MToken tok = new MToken();
         List<NameValuePair> params = new ArrayList<>();
-        params.add(new BasicNameValuePair("username", account));
-        params.add(new BasicNameValuePair("password", password));
-        params.add(new BasicNameValuePair("pac", pacId));
+        params.add(new BasicNameValuePair("token", token));
         GsonBuilder gsonBuilder = new GsonBuilder();
-        MToken token = gsonBuilder.create().fromJson(RestConn.postRestResponse("http://127.0.0.1:8000/app/apptoken", params), MToken.class);
-        if(token == null){
-            return false;
-        }
+        RestConn.postRestResponse("apps/validate", params);
+        
+        tok.setCurp(curp);
+        tok.setName("");
+        tok.setToken(token);
         Session sess = Sessions.getCurrent();
-        sess.setAttribute("token", token);
+        sess.setAttribute("token", tok);
+        
 
         return true;
     }

@@ -67,6 +67,6 @@ public abstract class CodigosCIE extends SearchWindow {
     @Override
     public Collection<?> getResults() {
         GsonBuilder gsonBuilder = new GsonBuilder();
-        return gsonBuilder.create().fromJson(RestConn.getRestResponse(getRestResponseURL()), CodigoCIE.LIST_TYPE);
+        return gsonBuilder.create().fromJson(RestConn.getRestResponse(getRestResponseURL(), null), CodigoCIE.LIST_TYPE);
     }
 }

@@ -16,11 +16,10 @@ public class WExternal extends Window {
     private final AuthenticationService authService = new TokenAuthenticationService();
 
     public WExternal() {
-        String user = Executions.getCurrent().getParameter("user");
-        String pass = Executions.getCurrent().getParameter("password");
-        String pacId = Executions.getCurrent().getParameter("pac");
+        String token = Executions.getCurrent().getParameter("token");
+        String pacId = Executions.getCurrent().getParameter("curp");
 
-        if (!authService.loginApp(user, pass, pacId)) {
+        if (!authService.loginApp(token, pacId)) {
             Notification.showWarning("Usuario y/o contraseña invália");
         } else {
             Sessions.getCurrent().setAttribute("external", "Y");

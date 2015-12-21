@@ -7,10 +7,14 @@ import com.delarosa.portal.zk.GridLayout;
 import com.delarosa.portal.zk.Listhead;
 import com.delarosa.portal.zk.SearchWindow;
 import com.google.gson.GsonBuilder;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
+import org.apache.commons.lang3.time.DateUtils;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
@@ -25,7 +29,6 @@ import org.zkoss.zul.ListitemRenderer;
  */
 public class WEventos extends SearchWindow {
 
-//    private Textbox id;
     private Datebox fechaIni;
     private Datebox fechaFin;
 
@@ -35,6 +38,7 @@ public class WEventos extends SearchWindow {
 
     @Override
     public Component getSearchPanel() {
+        
         GridLayout gridLayout = new GridLayout();
         fechaIni = new Datebox();
         fechaIni.setValue(new Date());
@@ -53,7 +57,22 @@ public class WEventos extends SearchWindow {
             new Listcell(t.getMedico()).setParent(lstm);
             new Listcell(t.getCedula()).setParent(lstm);
             new Listcell(t.getEspecialidad()).setParent(lstm);
-            new Listcell(t.getTipo()).setParent(lstm);
+            String text = null;
+            switch (t.getTipo()) {
+                case "C":
+                    text = "Cita";
+                    break;
+                case "A":
+                    text = "Ambulatorio";
+                    break;
+                case "H":
+                    text = "Hospitalización";
+                    break;
+                case "U":
+                    text = "Urgencia";
+                    break;
+            }
+            new Listcell(text).setParent(lstm);
             new Listcell(t.getMotivo()).setParent(lstm);
             lstm.addEventListener(Events.ON_CLICK, (final Event event) -> {
                 open(new WEventosDet(t.getId()));
@@ -79,13 +98,17 @@ public class WEventos extends SearchWindow {
     public Collection<?> getResults() {
         GsonBuilder gsonBuilder = new GsonBuilder();
         StringBuilder url = new StringBuilder();
-        url.append("http://127.0.0.1:8000/pacientes/");
+        List<NameValuePair> params = new ArrayList<>();
+        params.add(new BasicNameValuePair("fechaInicio", new Timestamp(DateUtils.toCalendar(fechaIni.getValue()).getTimeInMillis()).toString()));
+        params.add(new BasicNameValuePair("fechaFin", new Timestamp(DateUtils.toCalendar(fechaFin.getValue()).getTimeInMillis()).toString()));
+        
+        
+        url.append("pacientes/");
         url.append(TokenAuthenticationService.getCurp());
         url.append("/eventos");
-        List<MEvento> eventos = gsonBuilder.create().fromJson(RestConn.getRestResponse(url.toString()), MEvento.LIST_TYPE);
-        eventos = eventos.stream().filter(p -> p.getFechaInicio().after(fechaIni.getValue()) || p.getFechaFin().after(fechaFin.getValue())).collect(Collectors.toList());
-        
-        return eventos;
-    }
+        List<MEvento> eventos = gsonBuilder.create().fromJson(RestConn.getRestResponse(url.toString(), params), MEvento.LIST_TYPE);
+
+        return eventos != null? eventos : new ArrayList<>();
+   }
 
 }

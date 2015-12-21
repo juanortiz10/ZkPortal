@@ -1,8 +1,6 @@
 package com.delarosa.portal.ui;
 
 import com.delarosa.portal.authentication.TokenAuthenticationService;
-import com.delarosa.portal.db.entity.MEvento;
-import com.delarosa.portal.db.entity.MReceta;
 import com.delarosa.portal.utils.RestConn;
 import com.delarosa.portal.zk.GridLayout;
 import com.delarosa.portal.zk.Listhead;
@@ -10,17 +8,11 @@ import com.delarosa.portal.zk.SearchWindow;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -101,7 +93,7 @@ public class WBusqueda extends SearchWindow {
         Listhead listhead = new Listhead();
         listhead.newHeader("Fecha").setHflex("min");
         listhead.newHeader("Tipo de Evento").setHflex("min");
-        listhead.newHeader("Highlight").setHflex("1");
+        listhead.newHeader("Información").setHflex("1");
         return listhead;
     }
 
@@ -117,7 +109,7 @@ public class WBusqueda extends SearchWindow {
             if (StringUtils.isNoneBlank(textbox.getText())) {
                 GsonBuilder gsonBuilder = new GsonBuilder();
                 StringBuilder url = new StringBuilder();
-                url.append("http://127.0.0.1:8000/pacientes/");
+                url.append("pacientes/");
                 url.append(TokenAuthenticationService.getCurp());
                 url.append("/busqueda");
                 List<NameValuePair> params = new ArrayList<>();

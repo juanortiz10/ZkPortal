@@ -6,6 +6,7 @@ import com.delarosa.portal.utils.RestConn;
 import com.delarosa.portal.zk.Listhead;
 import com.delarosa.portal.zk.SearchWindow;
 import com.google.gson.GsonBuilder;
+import java.util.ArrayList;
 import java.util.Collection;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Listcell;
@@ -81,10 +82,12 @@ public class WAlergias extends SearchWindow {
     public Collection<?> getResults() {
         GsonBuilder gsonBuilder = new GsonBuilder();
         StringBuilder url = new StringBuilder();
-        url.append("http://127.0.0.1:8000/pacientes/");
+        url.append("pacientes/");
         url.append(TokenAuthenticationService.getCurp());
         url.append("/alergias");
-        return gsonBuilder.create().fromJson(RestConn.getRestResponse(url.toString()), MAlergia.LIST_TYPE);
+        
+        ArrayList<MAlergia> res = gsonBuilder.create().fromJson(RestConn.getRestResponse(url.toString(), null), MAlergia.LIST_TYPE);
+        return res != null ? res : new ArrayList<MAlergia>();
     }
 
 }

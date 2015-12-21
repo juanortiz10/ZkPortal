@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
@@ -139,7 +138,7 @@ class WEventosDet extends DetWindow {
     public ArrayList<Collection<?>> getResults(String id) {
         ArrayList<Collection<?>> res = new ArrayList<>();
         GsonBuilder gsonBuilder = new GsonBuilder();
-        MEventoDet info = gsonBuilder.create().fromJson(RestConn.getRestResponse("http://127.0.0.1:8000/pacientes/".concat(TokenAuthenticationService.getCurp().concat("/eventos/").concat(id))), MEventoDet.class);
+        MEventoDet info = gsonBuilder.create().fromJson(RestConn.getRestResponse("pacientes/".concat(TokenAuthenticationService.getCurp().concat("/eventos/").concat(id)), null), MEventoDet.class);
         
         res.add(info.getTomas());
         res.add(info.getRecetas());

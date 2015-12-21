@@ -11,6 +11,7 @@ import com.delarosa.portal.utils.RestConn;
 import com.delarosa.portal.zk.Listhead;
 import com.delarosa.portal.zk.SearchWindow;
 import com.google.gson.GsonBuilder;
+import java.util.ArrayList;
 import java.util.Collection;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Listcell;
@@ -56,12 +57,14 @@ public class WMedicamentos extends SearchWindow {
 
     @Override
     public Collection<?> getResults() {
-         GsonBuilder gsonBuilder = new GsonBuilder();
-         StringBuilder url = new StringBuilder();
-         url.append("http://127.0.0.1:8000/pacientes/");
-         url.append(TokenAuthenticationService.getCurp());
-         url.append("/medicamentos");
-        return gsonBuilder.create().fromJson(RestConn.getRestResponse(url.toString()), MMedicamento.LIST_TYPE);
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        StringBuilder url = new StringBuilder();
+        url.append("pacientes/");
+        url.append(TokenAuthenticationService.getCurp());
+        url.append("/medicamentos");
+         
+        ArrayList<MMedicamento> res = gsonBuilder.create().fromJson(RestConn.getRestResponse(url.toString(), null), MMedicamento.LIST_TYPE); 
+        return res != null ? res : new ArrayList<>();
     }
     
 }
