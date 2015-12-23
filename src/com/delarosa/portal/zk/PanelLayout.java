@@ -48,6 +48,7 @@ public final class PanelLayout extends Panel {
         Panelchildren pChildren = new Panelchildren();
         panelP.appendChild(pChildren);
         Hbox grid = new Hbox();
+        grid.setWidth("100%");
         ZKUtils.append(pChildren, grid);
         
         if(component1 != null){

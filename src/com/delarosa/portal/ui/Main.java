@@ -124,7 +124,7 @@ public final class Main extends Window {
 
 
         Navitem medicamentos = new Navitem();
-        medicamentos.setLabel("Medicamentos en Casa");
+        medicamentos.setLabel("Medicamentos (Casa)");
         medicamentos.setId("m");
         medicamentos.setIconSclass("z-icon-medkit");
         medicamentos.setWidth("100%");

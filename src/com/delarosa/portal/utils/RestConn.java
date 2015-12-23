@@ -23,7 +23,7 @@ import org.apache.http.util.EntityUtils;
  * @author odelarosa
  */
 public class RestConn {
-    public static String url = "http://192.168.11.139:8000/";
+    public static String url = "http://127.0.0.1:8000/";
     
     public static String getRestResponse(String restUrl, List<NameValuePair> params) {
         String test = null;
@@ -43,7 +43,7 @@ public class RestConn {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 300) {
                     HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
+                    return entity != null ? EntityUtils.toString(entity, "UTF-8") : null;
                 } else {
                     throw new ClientProtocolException("Unexpected response status: " + status);
                 }
@@ -78,7 +78,7 @@ public class RestConn {
                 int status = response.getStatusLine().getStatusCode();
                 if (status >= 200 && status < 300) {
                     HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
+                    return entity != null ? EntityUtils.toString(entity, "UTF-8") : null;
                 } else {
                     throw new ClientProtocolException("Unexpected response status: " + status);
                 }
