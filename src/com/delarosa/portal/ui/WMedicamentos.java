@@ -47,11 +47,11 @@ public class WMedicamentos extends SearchWindow {
     @Override
     public Listhead getListHeader() {
         Listhead listhead = new Listhead();
-        listhead.newHeader("Código");
-        listhead.newHeader("Nombre");
-        listhead.newHeader("Dosis");
-        listhead.newHeader("Vía");
-        listhead.newHeader("Indicación");
+        listhead.newHeader("Código", "codigo");
+        listhead.newHeader("Nombre", "nombre");
+        listhead.newHeader("Dosis", "dosis");
+        listhead.newHeader("Vía", "via");
+        listhead.newHeader("Indicación", "indicacion");
         return listhead;
     }
 

@@ -6,10 +6,17 @@ import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import javafx.scene.web.WebView;
+import static org.eclipse.jetty.http.HttpVersion.HTTP_1_1;
+import org.eclipse.jetty.server.HttpConfiguration;
+import org.eclipse.jetty.server.HttpConnectionFactory;
+import org.eclipse.jetty.server.SecureRequestCustomizer;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.ServerConnector;
+import org.eclipse.jetty.server.SslConnectionFactory;
 import org.eclipse.jetty.server.handler.DefaultHandler;
 import org.eclipse.jetty.server.handler.HandlerCollection;
 import org.eclipse.jetty.server.handler.ResourceHandler;
+import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 /**
@@ -18,7 +25,8 @@ import org.eclipse.jetty.webapp.WebAppContext;
  */
 public class JettyZk {
 
-    public static final int PORT = 9090;
+    public static final int PORT = 9999;
+    public static final int SSL_PORT = 9090;
 
     /**
      * @param args the command line arguments
@@ -26,13 +34,19 @@ public class JettyZk {
     public static void main(String[] args) {
         try {
             Server server = new Server(PORT);
-
+            
+            SslContextFactory sslcontext = new SslContextFactory();
+            sslcontext.setKeyStorePath("src/com/delarosa/portal/keystore");
+            sslcontext.setKeyStorePassword("OBF:1w1c1svw1u9d1yf21t331yf41ua51sw21w26");
+            ServerConnector connector = new ServerConnector(server, sslcontext);
+            connector.setPort(SSL_PORT);
+            server.addConnector(connector);
+            
             // Handler for multiple web apps
             HandlerCollection handlers = new HandlerCollection();
-
             // Creating the first web application context
             WebAppContext webcontext = new WebAppContext();
-            webcontext.setResourceBase("src/com/delarosa/portal/web/");
+            webcontext.setResourceBase("src/com/delarosa/portal/web");
             webcontext.setDefaultsDescriptor("src/com/delarosa/portal/webdefault.xml");
 
             ResourceHandler handler = new ResourceHandler();
@@ -48,7 +62,7 @@ public class JettyZk {
             // Starting the Server
             server.start();
 
-            showBrowser();
+            //showBrowser();
 
             server.join();
         } catch (Exception ex) {

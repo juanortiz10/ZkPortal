@@ -71,10 +71,10 @@ public class WAlergias extends SearchWindow {
     @Override
     public Listhead getListHeader() {
         Listhead listhead = new Listhead();
-        listhead.newHeader("Tipo").setHflex("min");
-        listhead.newHeader("Alergia").setHflex("min");
-        listhead.newHeader("Severidad").setHflex("min");
-        listhead.newHeader("Reacción").setHflex("1");
+        listhead.newHeader("Tipo", "tipo").setHflex("min");
+        listhead.newHeader("Alergia", "nombre").setHflex("min");
+        listhead.newHeader("Severidad", "severidad").setHflex("min");
+        listhead.newHeader("Reacción", "reaccion").setHflex("1");
         return listhead;
     }
 

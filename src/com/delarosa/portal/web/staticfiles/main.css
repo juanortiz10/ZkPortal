@@ -27,5 +27,12 @@ body {
 }
 
 .z-row:hover > .z-row-inner, .z-row:hover > .z-cell {
-        background: none;
+    background: none;
 }
+
+
+.z-listbox-body {
+    position: relative; 
+    overflow: auto !important;
+}
+

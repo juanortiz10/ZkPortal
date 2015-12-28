@@ -91,9 +91,9 @@ public class WBusqueda extends SearchWindow {
     @Override
     public Listhead getListHeader() {
         Listhead listhead = new Listhead();
-        listhead.newHeader("Fecha").setHflex("min");
-        listhead.newHeader("Tipo de Evento").setHflex("min");
-        listhead.newHeader("Información").setHflex("1");
+        listhead.newHeader("Fecha","fecha").setHflex("min");
+        listhead.newHeader("Tipo de Evento", "tipo").setHflex("min");
+        listhead.newHeader("Información", "highlight").setHflex("1");
         return listhead;
     }
 

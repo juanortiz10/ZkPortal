@@ -15,4 +15,14 @@ public class Listhead extends org.zkoss.zul.Listhead {
 
         return listheader;
     }
+
+    public Listheader newHeader(String text, String property) {
+        Listheader listheader = newHeader(text);
+
+        listheader.setSort("auto");
+        listheader.setSortAscending(new DynamicComparator(true, property));
+        listheader.setSortDescending(new DynamicComparator(false, property));
+
+        return listheader;
+    }
 }

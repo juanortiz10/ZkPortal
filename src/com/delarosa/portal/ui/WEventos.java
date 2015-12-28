@@ -3,22 +3,19 @@ package com.delarosa.portal.ui;
 import com.delarosa.portal.authentication.TokenAuthenticationService;
 import com.delarosa.portal.db.entity.MEvento;
 import com.delarosa.portal.utils.RestConn;
+import com.delarosa.portal.zk.DateRange;
 import com.delarosa.portal.zk.GridLayout;
 import com.delarosa.portal.zk.Listhead;
 import com.delarosa.portal.zk.SearchWindow;
 import com.google.gson.GsonBuilder;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
-import org.apache.commons.lang3.time.DateUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
-import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.ListitemRenderer;
@@ -29,8 +26,8 @@ import org.zkoss.zul.ListitemRenderer;
  */
 public class WEventos extends SearchWindow {
 
-    private Datebox fechaIni;
-    private Datebox fechaFin;
+    private DateRange fechaIni;
+    private DateRange fechaFin;
 
     public WEventos() {
         super(true);
@@ -40,10 +37,8 @@ public class WEventos extends SearchWindow {
     public Component getSearchPanel() {
         
         GridLayout gridLayout = new GridLayout();
-        fechaIni = new Datebox();
-        fechaIni.setValue(new Date());
-        fechaFin = new Datebox();
-        fechaFin.setValue(new Date());
+        fechaIni = new DateRange();
+        fechaFin = new DateRange();
         gridLayout.addRow("Fecha Inicial", fechaIni, "Fecha Final", fechaFin, null, null);
         return gridLayout;
     }
@@ -83,14 +78,14 @@ public class WEventos extends SearchWindow {
     @Override
     public Listhead getListHeader() {
         Listhead listhead = new Listhead();
-        listhead.newHeader("ID").setWidth("50px");
-        listhead.newHeader("Fecha Inicio").setHflex("min");
-        listhead.newHeader("Fecha Fin").setHflex("min");
-        listhead.newHeader("Nombre Medico").setHflex("1");
-        listhead.newHeader("Cedula").setHflex("min");
-        listhead.newHeader("Especialidad").setHflex("min");
-        listhead.newHeader("Tipo").setHflex("min");
-        listhead.newHeader("Motivo").setHflex("min");
+        listhead.newHeader("ID", "id").setWidth("50px");
+        listhead.newHeader("Fecha Inicio", "fechaInicio").setHflex("min");
+        listhead.newHeader("Fecha Fin", "fechaFin").setHflex("min");
+        listhead.newHeader("Nombre Medico", "medico").setHflex("1");
+        listhead.newHeader("Cedula", "cedula").setHflex("min");
+        listhead.newHeader("Especialidad", "especialidad").setHflex("min");
+        listhead.newHeader("Tipo", "tipo").setHflex("min");
+        listhead.newHeader("Motivo", "motivo").setHflex("min");
         return listhead;
     }
 
@@ -99,8 +94,10 @@ public class WEventos extends SearchWindow {
         GsonBuilder gsonBuilder = new GsonBuilder();
         StringBuilder url = new StringBuilder();
         List<NameValuePair> params = new ArrayList<>();
-        params.add(new BasicNameValuePair("fechaInicio", new Timestamp(DateUtils.toCalendar(fechaIni.getValue()).getTimeInMillis()).toString()));
-        params.add(new BasicNameValuePair("fechaFin", new Timestamp(DateUtils.toCalendar(fechaFin.getValue()).getTimeInMillis()).toString()));
+        params.add(new BasicNameValuePair("desde_fechaInicio", fechaIni.getDate().toString()));
+        params.add(new BasicNameValuePair("hasta_fechaInicio", fechaIni.getDate2().toString()));
+        params.add(new BasicNameValuePair("desde_fechaFin", fechaIni.getDate().toString()));
+        params.add(new BasicNameValuePair("hasta_fechaFin", fechaIni.getDate().toString()));
         
         
         url.append("pacientes/");

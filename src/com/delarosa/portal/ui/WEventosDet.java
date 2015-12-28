@@ -103,31 +103,31 @@ class WEventosDet extends DetWindow {
         ArrayList<Listhead> headers = new ArrayList<>();
 
         Listhead tomas = new Listhead();
-        tomas.newHeader("Fecha").setHflex("max");
+        tomas.newHeader("Fecha", "fecha").setHflex("max");
         headers.add(tomas);
         
         Listhead receta = new Listhead();
-        receta.newHeader("Fecha").setHflex("min");
-        receta.newHeader("Notas").setHflex("max");
+        receta.newHeader("Fecha", "fecha").setHflex("min");
+        receta.newHeader("Notas", "notas").setHflex("max");
         headers.add(receta);
         
         Listhead diac = new Listhead();
-        diac.newHeader("Fecha").setHflex("min");
-        diac.newHeader("Nombre").setHflex("max");
-        diac.newHeader("Codigo").setHflex("min");
+        diac.newHeader("Fecha", "fecha").setHflex("min");
+        diac.newHeader("Nombre", "nombre").setHflex("max");
+        diac.newHeader("Codigo", "codigo").setHflex("min");
         headers.add(diac);
         
         Listhead inter = new Listhead();
-        inter.newHeader("Fecha").setHflex("min");
-        inter.newHeader("Nombre").setHflex("max");
-        inter.newHeader("Codigo").setHflex("min");
+        inter.newHeader("Fecha", "fecha").setHflex("min");
+        inter.newHeader("Nombre", "nombre").setHflex("max");
+        inter.newHeader("Codigo", "codigo").setHflex("min");
         headers.add(inter);
         
         Listhead cuest = new Listhead();
-        cuest.newHeader("Titulo").setHflex("min");
-        cuest.newHeader("Pregunta").setHflex("min");
-        cuest.newHeader("Respuesta").setHflex("min");
-        cuest.newHeader("Descripcion").setHflex("max");
+        cuest.newHeader("Titulo", "titulo").setHflex("min");
+        cuest.newHeader("Pregunta", "pregunta").setHflex("min");
+        cuest.newHeader("Respuesta", "respuesta").setHflex("min");
+        cuest.newHeader("Descripcion", "descripcion").setHflex("max");
         headers.add(cuest);
         
         

@@ -1,16 +1,16 @@
 package com.delarosa.portal.ui;
 
 import com.delarosa.portal.zk.ZKUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.zkoss.zhtml.Li;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
-import org.zkoss.zk.ui.event.SelectEvent;
 import org.zkoss.zk.ui.event.SwipeEvent;
-import org.zkoss.zkmax.zul.Navbar;
-import org.zkoss.zkmax.zul.Navitem;
+import org.zkoss.zul.A;
 import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Center;
 import org.zkoss.zul.North;
@@ -26,6 +26,7 @@ public final class Main extends Window {
 
     private final Borderlayout borderlayout = new Borderlayout();
     private final Center center = new Center();
+    private A selected;
     private final West west = new West();
     private final WUserPanel userPanel = new WUserPanel();
     private final North north = new North();
@@ -34,11 +35,14 @@ public final class Main extends Window {
             north.appendChild(userPanel);
             north.setStyle("background:#5687A8;text-align:right;");
 
-            west.setWidth("200px");
-            west.setTitle(" ");
+            west.setAutoscroll(true);
             west.setCollapsible(true);
+            west.setTitle(StringUtils.SPACE);
 
-            createMenu(west);
+            west.setStyle("position:relative;");
+            west.setWidth("200px");
+            west.appendChild(createMenu());
+
 
             EventListener<SwipeEvent> swipe = (SwipeEvent t) -> {
                 if (null != t.getSwipeDirection()) {
@@ -94,81 +98,74 @@ public final class Main extends Window {
         center.appendChild(component);
     }
 
-    public void createMenu(West west) {
-        Navbar navbar = new Navbar("vertical");
+    public Component createMenu() {
+        org.zkoss.zhtml.Ul ul = new org.zkoss.zhtml.Ul();
+        ul.setSclass("menu");
 
-        Navitem home = new Navitem();
-        home.setLabel("Inicio");
-        home.setId("k");
-        home.setIconSclass("z-icon-home");
-        home.setWidth("100%");
-        home.setSelected(true);
+        Li home = newMenuItem("Inicio", "z-icon-home fa-2x");
+        home.getFirstChild().addEventListener(Events.ON_CLICK, (Event t) -> {
+            open(new Home());
+        });
+        ul.appendChild(home);
 
-        Navitem buscar = new Navitem();
-        buscar.setLabel("Búsqueda");
-        buscar.setId("b");
-        buscar.setIconSclass("z-icon-search");
-        buscar.setWidth("100%");
+        
+        Li buscar = newMenuItem("Búsqueda", "z-icon-search fa-2x");
+        buscar.getFirstChild().addEventListener(Events.ON_CLICK, (Event t) -> {
+            open(new WBusqueda());
+        });
+        ul.appendChild(buscar);
+        
+        Li citas = newMenuItem("Citas", "z-icon-calendar fa-2x");
+        citas.getFirstChild().addEventListener(Events.ON_CLICK, (Event t) -> {
+            open(new WEventos());
+        });
+        ul.appendChild(citas);
 
-        Navitem citas = new Navitem();
-        citas.setLabel("Citas");
-        citas.setId("c");
-        citas.setIconSclass("z-icon-calendar");
-        citas.setWidth("100%");
+        Li alergias = newMenuItem("Alergias", "z-icon-exclamation fa-2x");
+        alergias.getFirstChild().addEventListener(Events.ON_CLICK, (Event t) -> {
+            open(new WAlergias());
+        });
+       ul.appendChild(alergias);
 
-        Navitem alergias = new Navitem();
-        alergias.setLabel("Alergias");
-        alergias.setId("a");
-        alergias.setIconSclass("z-icon-exclamation");
-        alergias.setWidth("100%");
+        Li medicamentos = newMenuItem("Medicamentos (Casa)", "z-icon-medkit fa-2x");
+        medicamentos.getFirstChild().addEventListener(Events.ON_CLICK, (Event t) -> {
+            open(new WMedicamentos());
+        });
+       ul.appendChild(medicamentos);
+          
 
-
-        Navitem medicamentos = new Navitem();
-        medicamentos.setLabel("Medicamentos (Casa)");
-        medicamentos.setId("m");
-        medicamentos.setIconSclass("z-icon-medkit");
-        medicamentos.setWidth("100%");
-
-        navbar.appendChild(home);
-        navbar.appendChild(buscar);
-        navbar.appendChild(citas);
-        navbar.appendChild(alergias);
-        navbar.appendChild(medicamentos);
-
-        EventListener<SelectEvent> eventListener = (SelectEvent t) -> {
-            Navitem navitem = (Navitem) t.getSelectedItems().iterator().next();
-            String id = navitem.getId();
-            switch (id) {
-                case "k":
-                    open(new Home());
-                    break;
-                case "b":
-                    open(new WBusqueda());
-                    break;
-                case "c":
-                    open(new WEventos());
-                    break;
-                case "a":
-                    open(new WAlergias());
-                    break;
-                case "m":
-                    open(new WMedicamentos());
-                    break;
-            }
-        };
-
-        navbar.addEventListener(Events.ON_SELECT, eventListener);
-
-        west.appendChild(navbar);
-
-        navbar.setWidth("100%");
-        navbar.setHeight("100%");
+        setMenuSelected((A) home.getFirstChild());
+        return ul;
     }
 
     public void onCreate() {
         getPage().setTitle("Portal Web");
 
         Events.echoEvent("onPrinted", this, null);
+    }
+    
+     private Li newMenuItem(String title, String icon) {
+        Li li = new Li();
+        final A a = new A(title);
+        a.addEventListener(Events.ON_CLICK, (Event t) -> {
+            setMenuSelected(a);
+        });
+        a.setHref("#");
+        li.appendChild(a);
+
+        if (StringUtils.isNoneBlank(icon)) {
+            a.setIconSclass(icon);
+        }
+
+        return li;
+    }
+
+    private void setMenuSelected(A a) {
+        if (selected != null) {
+            selected.setSclass(null);
+        }
+        a.setSclass("selected");
+        selected = a;
     }
 
 }

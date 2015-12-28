@@ -45,9 +45,9 @@ class WSignosEvento extends DetSearchWindow {
     @Override
     public Listhead getListHeader() {
         Listhead listhead = new Listhead();
-        listhead.newHeader("Nombre").setHflex("max");
-        listhead.newHeader("Valor").setHflex("min");
-        listhead.newHeader("Unidad").setHflex("min");  
+        listhead.newHeader("Nombre", "nombre").setHflex("max");
+        listhead.newHeader("Valor", "valor").setHflex("min");
+        listhead.newHeader("Unidad", "unidad").setHflex("min");  
         
         return listhead;
     }
