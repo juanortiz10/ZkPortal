@@ -96,8 +96,8 @@ public class WEventos extends SearchWindow {
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("desde_fechaInicio", fechaIni.getDate().toString()));
         params.add(new BasicNameValuePair("hasta_fechaInicio", fechaIni.getDate2().toString()));
-        params.add(new BasicNameValuePair("desde_fechaFin", fechaIni.getDate().toString()));
-        params.add(new BasicNameValuePair("hasta_fechaFin", fechaIni.getDate().toString()));
+        params.add(new BasicNameValuePair("desde_fechaFin", fechaFin.getDate().toString()));
+        params.add(new BasicNameValuePair("hasta_fechaFin", fechaFin.getDate2().toString()));
         
         
         url.append("pacientes/");

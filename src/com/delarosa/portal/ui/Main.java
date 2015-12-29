@@ -150,7 +150,6 @@ public final class Main extends Window {
         a.addEventListener(Events.ON_CLICK, (Event t) -> {
             setMenuSelected(a);
         });
-        a.setHref("#");
         li.appendChild(a);
 
         if (StringUtils.isNoneBlank(icon)) {

@@ -6,6 +6,7 @@
 package com.delarosa.portal.zk;
 
 import com.delarosa.portal.Utils;
+import java.sql.Timestamp;
 import java.util.Date;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Space;
@@ -39,15 +40,17 @@ public class DateRange extends Div {
      *
      * @return
      */
-    public Date getDate() {
+    public Timestamp getDate() {
         if (datebox.getValue() != null) {
             if (datebox2.getValue() != null) {
                 if (datebox.getValue().after(datebox2.getValue())) {
-                    return Utils.getStartOfDay(datebox2.getValue());
+                    
+                    return new Timestamp(Utils.getStartOfDay(datebox2.getValue()).getTime());
+                            
                 }
             }
 
-            return Utils.getStartOfDay(datebox.getValue());
+            return new Timestamp(Utils.getStartOfDay(datebox.getValue()).getTime());
         } else {
             return null;
         }
@@ -58,15 +61,15 @@ public class DateRange extends Div {
      *
      * @return
      */
-    public Date getDate2() {
+    public Timestamp getDate2() {
         if (datebox2.getValue() != null) {
             if (datebox.getValue() != null) {
                 if (datebox.getValue().after(datebox2.getValue())) {
-                    return Utils.getEndOfDay(datebox.getValue());
+                    return new Timestamp(Utils.getEndOfDay(datebox.getValue()).getTime());
                 }
             }
 
-            return Utils.getEndOfDay(datebox2.getValue());
+            return new Timestamp(Utils.getEndOfDay(datebox2.getValue()).getTime());
         } else {
             return null;
         }

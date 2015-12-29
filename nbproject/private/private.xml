@@ -3,6 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/zk/DateRange.java</file>
+            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/ui/WEventos.java</file>
+            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/utils/RestConn.java</file>
+            <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/ui/Main.java</file>
             <file>file:/home/dsolano/ZkPortal/src/com/delarosa/portal/JettyZk.java</file>
         </group>
     </open-files>
