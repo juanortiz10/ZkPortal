@@ -23,7 +23,7 @@ import org.apache.http.util.EntityUtils;
  * @author odelarosa
  */
 public class RestConn {
-    public static String url = "http://192.168.11.31:8000/";
+    public static String url = "http://127.0.0.1:8000/";
     
     public static String getRestResponse(String restUrl, List<NameValuePair> params) {
         String test = null;

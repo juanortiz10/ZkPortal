@@ -79,26 +79,27 @@ public class Home extends Window {
                 HashMap<String, List<Double>> map = new HashMap<>();
                 HashMap<String, List<String>> map2 = new HashMap<>();
 
-                tomas.stream().forEach((toma) -> {
-                    Timestamp fecha = toma.getFecha();
-                    toma.getSignos().stream().forEach((signo) -> {
-                        List<Double> lst = map.get(signo.getNombre());
-                        if (lst == null) {
-                            lst = new ArrayList<>();
-                        }
+                if(tomas != null){
+                    tomas.stream().forEach((toma) -> {
+                        Timestamp fecha = toma.getFecha();
+                        toma.getSignos().stream().forEach((signo) -> {
+                            List<Double> lst = map.get(signo.getNombre());
+                            if (lst == null) {
+                                lst = new ArrayList<>();
+                            }
 
-                        List<String> lst2 = map2.get(signo.getNombre());
-                        if (lst2 == null) {
-                            lst2 = new ArrayList<>();
-                        }
+                            List<String> lst2 = map2.get(signo.getNombre());
+                            if (lst2 == null) {
+                                lst2 = new ArrayList<>();
+                            }
 
-                        lst2.add(SDF.format(fecha));
-                        lst.add(signo.getValor());
-                        map2.put(signo.getNombre(), lst2);
-                        map.put(signo.getNombre(), lst);
+                            lst2.add(SDF.format(fecha));
+                            lst.add(signo.getValor());
+                            map2.put(signo.getNombre(), lst2);
+                            map.put(signo.getNombre(), lst);
+                        });
                     });
-                });
-
+                }
                 Set<String> set = map.keySet();
 
                 for (String key : set) {

@@ -47,8 +47,14 @@ public class WEventos extends SearchWindow {
     public ListitemRenderer<?> getItemRenderer() {
         return (Listitem lstm, MEvento t, int i) -> {
             new Listcell(t.getId()).setParent(lstm);
-            new Listcell(Index.SDF.format(t.getFechaInicio())).setParent(lstm);
-            new Listcell(Index.SDF.format(t.getFechaFin())).setParent(lstm);
+            if(t.getFechaInicio() != null)
+                new Listcell(Index.SDF.format(t.getFechaInicio())).setParent(lstm);
+            else
+                new Listcell("").setParent(lstm);
+            if(t.getFechaFin() != null)
+                new Listcell(Index.SDF.format(t.getFechaFin())).setParent(lstm);
+            else
+                new Listcell("").setParent(lstm);
             new Listcell(t.getMedico()).setParent(lstm);
             new Listcell(t.getCedula()).setParent(lstm);
             new Listcell(t.getEspecialidad()).setParent(lstm);
