@@ -88,7 +88,7 @@ public abstract class DetWindow extends Window {
     }
     
     private void setPanels(){
-        int columnas = 2;
+        int columnas = 3;
         ArrayList<Listbox> listboxes = new ArrayList<>();
         for (int i = 0; i < models.size(); i++) {
             Listbox listbox = new Listbox();
@@ -110,7 +110,7 @@ public abstract class DetWindow extends Window {
         }
         
         for(int i = 0; i <= (int)Math.ceil(models.size()/columnas); i++){
-            getPanelLayout().newPanelChildrenRow(titles.get(0 + (columnas*i)), listboxes.get(0 + (columnas*i)), titles.get(1 + (columnas*i)), listboxes.get(1 + (columnas*i)));        
+            getPanelLayout().newPanelChildrenRow(titles.get(0 + (columnas*i)), listboxes.get(0 + (columnas*i)), titles.get(1 + (columnas*i)), listboxes.get(1 + (columnas*i)), titles.get(2 + (columnas*i)), listboxes.get(2 + (columnas*i)));        
         }
     }
 

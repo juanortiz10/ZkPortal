@@ -18,6 +18,7 @@ import com.delarosa.portal.zk.Listhead;
 import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
@@ -32,9 +33,13 @@ import org.zkoss.zul.ListitemRenderer;
 class WEventosDet extends DetWindow {
 
     private String id;
-    public WEventosDet(String id) {
+    private HashMap<String, Object> params;
+
+    
+    public WEventosDet(String id, HashMap<String, Object> params) {
         super(true, id);
         this.id = id;
+        this.params = params;
     }
 
     @Override
@@ -42,9 +47,9 @@ class WEventosDet extends DetWindow {
         ArrayList<String> titles = new ArrayList<>();
         titles.add("Tomas");
         titles.add("Recetas");
+        titles.add("Cuestionarios");
         titles.add("Diagnosticos");
         titles.add("Intervenciones");
-        titles.add("Cuestionarios");
         
         return titles;
         
@@ -57,21 +62,28 @@ class WEventosDet extends DetWindow {
         ListitemRenderer<MToma> toma = (Listitem lstm, MToma t, int i) -> {
             lstm.appendChild(new Listcell(Index.SDF.format(t.getFecha())));
             lstm.addEventListener(Events.ON_CLICK, (final Event event) -> {
-                open(new WSignosEvento(t.getSignos(), id));
+                open(new WSignosEvento(t.getSignos(), id, params));
             });
         };
         renders.add(toma);
-        
-          
+                 
         ListitemRenderer<MReceta> receta = (Listitem lstm, MReceta t, int i) -> {
             lstm.appendChild(new Listcell(Index.SDF.format(t.getFecha())));
             lstm.appendChild(new Listcell(t.getNotas()));
             lstm.addEventListener(Events.ON_CLICK, (final Event event) -> {
-                open(new WMedicamentosEvento(t.getMedicamentos(), id));
+                open(new WMedicamentosEvento(t.getMedicamentos(), id, params));
             });
         };
         renders.add(receta);
         
+        ListitemRenderer<MCuestionario> cuest = (Listitem lstm, MCuestionario t, int i) -> {
+            lstm.appendChild(new Listcell(t.getTitulo()));
+            lstm.appendChild(new Listcell(Index.SDF.format(t.getFecha())));
+            lstm.addEventListener(Events.ON_CLICK, (final Event event) -> {
+                 open(new WPreguntasEvento(t.getPreguntas(), id, params));
+             });
+         };
+        renders.add(cuest);
         
         ListitemRenderer<MDiagnostico> diac = (Listitem lstm, MDiagnostico t, int i) -> {
             lstm.appendChild(new Listcell(Index.SDF.format(t.getFecha())));
@@ -86,15 +98,7 @@ class WEventosDet extends DetWindow {
             lstm.appendChild(new Listcell(t.getCodigo()));
         };
         renders.add(inter);
-          
-        ListitemRenderer<MCuestionario> cuest = (Listitem lstm, MCuestionario t, int i) -> {
-            lstm.appendChild(new Listcell(t.getTitulo()));
-            lstm.appendChild(new Listcell(t.getPregunta()));
-            lstm.appendChild(new Listcell(t.getRespuesta()));
-            lstm.appendChild(new Listcell(t.getDescripcion()));
-         };
-        renders.add(cuest);
-
+         
         return renders;
     }
 
@@ -111,6 +115,11 @@ class WEventosDet extends DetWindow {
         receta.newHeader("Notas", "notas").setHflex("max");
         headers.add(receta);
         
+        Listhead cuest = new Listhead();
+        cuest.newHeader("Titulo", "titulo").setHflex("max");
+        cuest.newHeader("Fecha", "fecha").setHflex("min");
+        headers.add(cuest);
+        
         Listhead diac = new Listhead();
         diac.newHeader("Fecha", "fecha").setHflex("min");
         diac.newHeader("Nombre", "nombre").setHflex("max");
@@ -122,38 +131,34 @@ class WEventosDet extends DetWindow {
         inter.newHeader("Nombre", "nombre").setHflex("max");
         inter.newHeader("Codigo", "codigo").setHflex("min");
         headers.add(inter);
-        
-        Listhead cuest = new Listhead();
-        cuest.newHeader("Titulo", "titulo").setHflex("min");
-        cuest.newHeader("Pregunta", "pregunta").setHflex("min");
-        cuest.newHeader("Respuesta", "respuesta").setHflex("min");
-        cuest.newHeader("Descripcion", "descripcion").setHflex("max");
-        headers.add(cuest);
-        
-        
+              
         return headers;
     }
 
     @Override
     public ArrayList<Collection<?>> getResults(String id) {
+        StringBuilder url = new StringBuilder();
+        url.append("pacientes/");
+        url.append(TokenAuthenticationService.getCurp());
+        url.append("/eventos/");
+        url.append(id);
+        
         ArrayList<Collection<?>> res = new ArrayList<>();
         GsonBuilder gsonBuilder = new GsonBuilder();
-        MEventoDet info = gsonBuilder.create().fromJson(RestConn.getRestResponse("pacientes/".concat(TokenAuthenticationService.getCurp().concat("/eventos/").concat(id)), null), MEventoDet.class);
+        MEventoDet info = gsonBuilder.create().fromJson(RestConn.getRestResponse(url.toString(), null), MEventoDet.class);
         
         res.add(info.getTomas());
         res.add(info.getRecetas());
+        res.add(info.getCuestionarios());
         res.add(info.getDiagnosticos());
         res.add(info.getIntervenciones());
-        res.add(info.getCuestionarios());
         return res;
 
     }
 
     @Override
     public Component backParent() {
-        return new WEventos();
+        return new WEventos(params);
     }
-
-   
-    
+       
 }

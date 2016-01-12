@@ -12,6 +12,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.NameValuePair;
@@ -33,11 +34,11 @@ public class WBusqueda extends SearchWindow {
     private Textbox textbox;
 
     public WBusqueda() {
-        super(true);
+        super(true, null);
     }
 
     @Override
-    public Component getSearchPanel() {
+    public Component getSearchPanel(HashMap<String, Object> params) {
         GridLayout gridLayout = new GridLayout();
         textbox = new Textbox();
 

@@ -5,7 +5,7 @@
  */
 package com.delarosa.portal.ui;
 
-import com.delarosa.portal.db.entity.MSigno;
+import com.delarosa.portal.db.entity.MPregunta;
 import com.delarosa.portal.zk.DetSearchWindow;
 import com.delarosa.portal.zk.Listhead;
 import java.util.ArrayList;
@@ -19,13 +19,11 @@ import org.zkoss.zul.ListitemRenderer;
  *
  * @author dsolano
  */
-class WSignosEvento extends DetSearchWindow {
-    private HashMap<String, Object> params;
+class WPreguntasEvento extends DetSearchWindow {
     private String id;
-    
-    
-    public WSignosEvento(ArrayList<MSigno> signos, String id, HashMap<String, Object> params) {
-        super(true, signos);
+    private HashMap<String, Object> params;
+    public WPreguntasEvento(ArrayList<MPregunta> preguntas, String id, HashMap<String, Object> params) {
+        super(true, preguntas);
         this.id = id;
         this.params = params;
     }
@@ -37,28 +35,26 @@ class WSignosEvento extends DetSearchWindow {
 
     @Override
     public ListitemRenderer<?> getItemRenderer() {
-        return (Listitem lstm, MSigno t, int i) -> {
-                     lstm.appendChild(new Listcell(t.getNombre()));
-                     lstm.appendChild(new Listcell(Double.toString(t.getValor())));
-                     lstm.appendChild(new Listcell(t.getUnidad()));
-
-                    
-                };
-    }
+        return (Listitem lstm, MPregunta m, int i) -> {
+            lstm.appendChild(new Listcell(m.getTitulo()));
+            lstm.appendChild(new Listcell(m.getPregunta()));
+            lstm.appendChild(new Listcell(m.getRespuesta()));
+            lstm.appendChild(new Listcell(m.getDescripcion()));
+        };    }
 
     @Override
     public Listhead getListHeader() {
         Listhead listhead = new Listhead();
-        listhead.newHeader("Nombre", "nombre").setHflex("max");
-        listhead.newHeader("Valor", "valor").setHflex("min");
-        listhead.newHeader("Unidad", "unidad").setHflex("min");  
-        
-        return listhead;
+        listhead.newHeader("Titulo", "titulo");
+        listhead.newHeader("Pregunta", "pregunta");
+        listhead.newHeader("Respuesta", "respuesta");
+        listhead.newHeader("Descripcion", "descripcion");
+        return listhead; 
     }
 
     @Override
     public Component backParent() {
         return new WEventosDet(id, params);
     }
-      
+    
 }

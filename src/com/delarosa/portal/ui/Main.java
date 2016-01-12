@@ -117,7 +117,7 @@ public final class Main extends Window {
         
         Li citas = newMenuItem("Eventos", "z-icon-calendar fa-2x");
         citas.getFirstChild().addEventListener(Events.ON_CLICK, (Event t) -> {
-            open(new WEventos());
+            open(new WEventos(null));
         });
         ul.appendChild(citas);
 

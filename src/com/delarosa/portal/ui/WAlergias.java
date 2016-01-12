@@ -8,6 +8,7 @@ import com.delarosa.portal.zk.SearchWindow;
 import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
@@ -20,11 +21,11 @@ import org.zkoss.zul.ListitemRenderer;
 public class WAlergias extends SearchWindow {
 
     public WAlergias() {
-        super(false);
+        super(false, null);
     }
 
     @Override
-    public Component getSearchPanel() {
+    public Component getSearchPanel(HashMap<String, Object> params) {
         return null;
     }
 
@@ -61,10 +62,10 @@ public class WAlergias extends SearchWindow {
                     severidad = "";
                     break;
             }
-            new Listcell(severidad).setParent(lstm);
-            new Listcell(a.getNombre()).setParent(lstm);
-            new Listcell(severidad).setParent(lstm);
-            new Listcell(a.getReaccion()).setParent(lstm);
+            lstm.appendChild(new Listcell(severidad));
+            lstm.appendChild(new Listcell(a.getNombre()));
+            lstm.appendChild(new Listcell(severidad));
+            lstm.appendChild(new Listcell(a.getReaccion()));
         };
     }
 

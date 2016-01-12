@@ -8,8 +8,10 @@ import com.delarosa.portal.zk.GridLayout;
 import com.delarosa.portal.zk.Listhead;
 import com.delarosa.portal.zk.SearchWindow;
 import com.google.gson.GsonBuilder;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -29,16 +31,16 @@ public class WEventos extends SearchWindow {
     private DateRange fechaIni;
     private DateRange fechaFin;
 
-    public WEventos() {
-        super(true);
+    public WEventos(HashMap<String, Object> params) {
+        super(true, params);
     }
 
     @Override
-    public Component getSearchPanel() {
-        
+    public Component getSearchPanel(HashMap<String, Object> params) {
         GridLayout gridLayout = new GridLayout();
         fechaIni = new DateRange();
         fechaFin = new DateRange();
+        loadParams(params);
         gridLayout.addRow("Fecha Inicial", fechaIni, "Fecha Final", fechaFin, null, null);
         return gridLayout;
     }
@@ -76,7 +78,7 @@ public class WEventos extends SearchWindow {
             new Listcell(text).setParent(lstm);
             new Listcell(t.getMotivo()).setParent(lstm);
             lstm.addEventListener(Events.ON_CLICK, (final Event event) -> {
-                open(new WEventosDet(t.getId()));
+                open(new WEventosDet(t.getId(), saveParams()));
             });
         };
     }
@@ -84,14 +86,14 @@ public class WEventos extends SearchWindow {
     @Override
     public Listhead getListHeader() {
         Listhead listhead = new Listhead();
-        listhead.newHeader("ID", "id").setWidth("50px");
+        listhead.newHeader("ID", "id").setWidth("45px");
         listhead.newHeader("Fecha Inicio", "fechaInicio").setHflex("min");
         listhead.newHeader("Fecha Fin", "fechaFin").setHflex("min");
-        listhead.newHeader("Nombre Medico", "medico").setHflex("1");
+        listhead.newHeader("Nombre Medico", "medico").setHflex("min");
         listhead.newHeader("Cedula", "cedula").setHflex("min");
         listhead.newHeader("Especialidad", "especialidad").setHflex("min");
         listhead.newHeader("Tipo", "tipo").setHflex("min");
-        listhead.newHeader("Motivo", "motivo").setHflex("min");
+        listhead.newHeader("Motivo", "motivo").setHflex("max");
         return listhead;
     }
 
@@ -104,8 +106,7 @@ public class WEventos extends SearchWindow {
         params.add(new BasicNameValuePair("hasta_fechaInicio", fechaIni.getDate2().toString()));
         params.add(new BasicNameValuePair("desde_fechaFin", fechaFin.getDate().toString()));
         params.add(new BasicNameValuePair("hasta_fechaFin", fechaFin.getDate2().toString()));
-        
-        
+                
         url.append("pacientes/");
         url.append(TokenAuthenticationService.getCurp());
         url.append("/eventos");
@@ -114,4 +115,30 @@ public class WEventos extends SearchWindow {
         return eventos != null? eventos : new ArrayList<>();
    }
 
+    public HashMap<String, Object> saveParams() {
+	HashMap<String, Object> params = new HashMap<>();
+	params.put("desde_fechaInicio", fechaIni.getDate());
+	params.put("hasta_fechaInicio", fechaIni.getDate2());
+	params.put("desde_fechaFin", fechaFin.getDate());
+	params.put("hasta_fechaFin", fechaFin.getDate2());
+	return params;
+    }
+    
+    public void loadParams(HashMap<String, Object> params) {
+	if (params != null){
+            Timestamp desdeFechaIni = (Timestamp)params.get("desde_fechaInicio");
+            Timestamp hastaFechaIni = (Timestamp)params.get("hasta_fechaInicio");
+            Timestamp desdeFechaFin = (Timestamp)params.get("desde_fechaFin");
+            Timestamp hastaFechaFin = (Timestamp)params.get("hasta_fechaFin");
+
+            if (desdeFechaIni != null)
+                fechaIni.setDate(desdeFechaIni);
+            if (hastaFechaIni != null)
+                fechaIni.setDate2(hastaFechaIni);
+            if (desdeFechaFin != null)
+                fechaFin.setDate(desdeFechaFin);
+            if (hastaFechaFin != null)
+                fechaFin.setDate2(hastaFechaFin);
+        }
+    }
 }

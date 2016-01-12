@@ -13,6 +13,7 @@ import com.delarosa.portal.zk.SearchWindow;
 import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
@@ -25,11 +26,11 @@ import org.zkoss.zul.ListitemRenderer;
 public class WMedicamentos extends SearchWindow {
 
     public WMedicamentos() {
-        super(false);
+        super(false, null);
     }
 
     @Override
-    public Component getSearchPanel() {
+    public Component getSearchPanel(HashMap<String, Object> params) {
         return null;
     }
 

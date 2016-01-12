@@ -5,6 +5,7 @@ import com.delarosa.portal.zk.Listhead;
 import com.delarosa.portal.zk.SearchWindow;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.ListitemRenderer;
@@ -21,7 +22,7 @@ public class Test extends SearchWindow {
     private Textbox textbox1;
 
     public Test() {
-        super(true);
+        super(true, null);
 
         Toolbarbutton newRecord = new Toolbarbutton();
         newRecord.setIconSclass("z-icon-file-o fa-2x");
@@ -30,7 +31,7 @@ public class Test extends SearchWindow {
     }
 
     @Override
-    public Component getSearchPanel() {
+    public Component getSearchPanel(HashMap<String, Object> params) {
         GridLayout gridLayout = new GridLayout();
         
         textbox = new Textbox();

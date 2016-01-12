@@ -1,6 +1,7 @@
 package com.delarosa.portal.zk;
 
 import java.util.Collection;
+import java.util.HashMap;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.Events;
@@ -15,11 +16,12 @@ import org.zkoss.zul.Toolbarbutton;
  * @author odelarosa
  */
 public abstract class SearchWindow extends Window {
-
+    private HashMap<String, Object> params;
     private final ListModelList<Object> model = new ListModelList<>();
 
-    public SearchWindow(boolean addToolBar) {
+    public SearchWindow(boolean addToolBar,  HashMap<String, Object> params) {
         super(addToolBar);
+        this.params= params;
         
         Toolbarbutton toolbarbutton = new Toolbarbutton(null);
         toolbarbutton.setIconSclass("z-icon-refresh fa-2x");
@@ -30,7 +32,7 @@ public abstract class SearchWindow extends Window {
         
         getToolbar().appendChild(toolbarbutton);
 
-        getPanelLayout().newPanelChildren(getSearchTitle(), true, getSearchPanel());
+        getPanelLayout().newPanelChildren(getSearchTitle(), true, getSearchPanel(params));
         getPanelLayout().newPanelChildren(getResultTitle(), true, getResultPanel());
 
         getPanelLayout().newEmptyDiv();
@@ -61,7 +63,7 @@ public abstract class SearchWindow extends Window {
         return listbox;
     }
 
-    public abstract Component getSearchPanel();
+    public abstract Component getSearchPanel(HashMap<String, Object> params);
 
     public abstract ListitemRenderer<?> getItemRenderer();
 

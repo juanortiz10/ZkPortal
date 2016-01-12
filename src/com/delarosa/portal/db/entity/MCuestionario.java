@@ -5,15 +5,34 @@
  */
 package com.delarosa.portal.db.entity;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+
 /**
  *
  * @author dsolano
  */
 public class MCuestionario {
+
     private String titulo;
-    private String pregunta;
-    private String respuesta;
-    private String descripcion;
+    private Timestamp fecha;
+    private ArrayList<MPregunta> preguntas = new ArrayList<>();
+
+    public ArrayList<MPregunta> getPreguntas() {
+        return preguntas;
+    }
+
+    public void setPreguntas(ArrayList<MPregunta> preguntas) {
+        this.preguntas = preguntas;
+    }
+
+    public Timestamp getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Timestamp fecha) {
+        this.fecha = fecha;
+    }
 
     public String getTitulo() {
         return titulo;
@@ -22,29 +41,4 @@ public class MCuestionario {
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
-
-    public String getPregunta() {
-        return pregunta;
-    }
-
-    public void setPregunta(String pregunta) {
-        this.pregunta = pregunta;
-    }
-
-    public String getRespuesta() {
-        return respuesta;
-    }
-
-    public void setRespuesta(String respuesta) {
-        this.respuesta = respuesta;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
 }

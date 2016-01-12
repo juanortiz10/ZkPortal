@@ -13,6 +13,7 @@ import com.delarosa.portal.zk.SearchWindow;
 import com.google.gson.GsonBuilder;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.HashMap;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Listcell;
@@ -30,7 +31,7 @@ public abstract class CodigosCIE extends SearchWindow {
     private Datebox fechaFin;
 
     public CodigosCIE() {
-        super(false);
+        super(false, null);
     }
 
     public abstract String getItemName();
@@ -38,7 +39,7 @@ public abstract class CodigosCIE extends SearchWindow {
     public abstract String getRestResponseURL();
 
     @Override
-    public Component getSearchPanel() {
+    public Component getSearchPanel(HashMap<String, Object> params) {
         GridLayout gridLayout = new GridLayout();
         fechaIni = new Datebox();
         fechaFin = new Datebox();

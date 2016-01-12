@@ -9,6 +9,7 @@ import com.delarosa.portal.db.entity.MMedicamento;
 import com.delarosa.portal.zk.DetSearchWindow;
 import com.delarosa.portal.zk.Listhead;
 import java.util.ArrayList;
+import java.util.HashMap;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
@@ -19,11 +20,13 @@ import org.zkoss.zul.ListitemRenderer;
  * @author dsolano
  */
 class WMedicamentosEvento extends DetSearchWindow {
-
+    private HashMap<String, Object> params;
     private String id;
-    public WMedicamentosEvento(ArrayList<MMedicamento> signos, String id) {
+
+    public WMedicamentosEvento(ArrayList<MMedicamento> signos, String id, HashMap<String, Object> params) {
         super(true, signos);
         this.id = id;
+        this.params = params;
     }
 
     @Override
@@ -34,11 +37,11 @@ class WMedicamentosEvento extends DetSearchWindow {
     @Override
     public ListitemRenderer<?> getItemRenderer() {
         return (Listitem lstm, MMedicamento m, int i) -> {
-            new Listcell(m.getCodigo()).setParent(lstm);
-            new Listcell(m.getNombre()).setParent(lstm);
-            new Listcell(m.getDosis()).setParent(lstm);
-            new Listcell(m.getVia()).setParent(lstm);
-            new Listcell(m.getIndicacion()).setParent(lstm);
+            lstm.appendChild(new Listcell(m.getCodigo()));
+            lstm.appendChild(new Listcell(m.getNombre()));
+            lstm.appendChild(new Listcell(m.getDosis()));
+            lstm.appendChild(new Listcell(m.getVia()));
+            lstm.appendChild(new Listcell(m.getIndicacion()));
         };
     }
 
@@ -55,7 +58,7 @@ class WMedicamentosEvento extends DetSearchWindow {
 
     @Override
     public Component backParent() {
-        return new WEventosDet(id);
+        return new WEventosDet(id, params);
     }
       
 }
