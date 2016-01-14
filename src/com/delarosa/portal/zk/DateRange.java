@@ -12,6 +12,7 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.Space;
 
 import org.zkoss.zul.Datebox;
+import org.zkoss.zul.Label;
 
 /**
  * Rango de fechas, regresa el rango de las 00:00 a las 23:59 de las fechas
@@ -31,7 +32,7 @@ public class DateRange extends Div {
      */
     public DateRange() {
         appendChild(datebox);
-        appendChild(new Space());
+        appendChild(new Label("    a    "));
         appendChild(datebox2);
     }
 
