@@ -1,5 +1,6 @@
 package com.delarosa.portal.utils;
 
+import com.delarosa.portal.Configurations;
 import com.delarosa.portal.authentication.TokenAuthenticationService;
 import java.io.IOException;
 import java.util.List;
@@ -23,8 +24,14 @@ import org.apache.http.util.EntityUtils;
  * @author odelarosa
  */
 public class RestConn {
-    public static String url = "http://127.0.0.1:8000/";
-    
+    public static String url;
+    static {
+        if(Configurations.IS_TEST){
+            url = "http://127.0.0.1:8001/";
+        }else {
+            url = "http://127.0.0.1:8000/";
+        }
+    }    
     public static String getRestResponse(String restUrl, List<NameValuePair> params) {
         String test = null;
         CloseableHttpClient httpclient = HttpClients.createDefault();

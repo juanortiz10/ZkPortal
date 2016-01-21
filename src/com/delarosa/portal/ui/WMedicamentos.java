@@ -7,6 +7,7 @@ package com.delarosa.portal.ui;
 
 import com.delarosa.portal.authentication.TokenAuthenticationService;
 import com.delarosa.portal.db.entity.MMedicamento;
+import com.delarosa.portal.utils.Cumulus;
 import com.delarosa.portal.utils.RestConn;
 import com.delarosa.portal.zk.Listhead;
 import com.delarosa.portal.zk.SearchWindow;
@@ -58,14 +59,7 @@ public class WMedicamentos extends SearchWindow {
 
     @Override
     public Collection<?> getResults() {
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        StringBuilder url = new StringBuilder();
-        url.append("pacientes/");
-        url.append(TokenAuthenticationService.getCurp());
-        url.append("/medicamentos");
-         
-        ArrayList<MMedicamento> res = gsonBuilder.create().fromJson(RestConn.getRestResponse(url.toString(), null), MMedicamento.LIST_TYPE); 
-        return res != null ? res : new ArrayList<>();
+        return Cumulus.getMedicamentos();
     }
     
 }

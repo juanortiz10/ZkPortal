@@ -2,6 +2,7 @@ package com.delarosa.portal.ui;
 
 import com.delarosa.portal.authentication.TokenAuthenticationService;
 import com.delarosa.portal.db.entity.MAlergia;
+import com.delarosa.portal.utils.Cumulus;
 import com.delarosa.portal.utils.RestConn;
 import com.delarosa.portal.zk.Listhead;
 import com.delarosa.portal.zk.SearchWindow;
@@ -81,14 +82,7 @@ public class WAlergias extends SearchWindow {
 
     @Override
     public Collection<?> getResults() {
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        StringBuilder url = new StringBuilder();
-        url.append("pacientes/");
-        url.append(TokenAuthenticationService.getCurp());
-        url.append("/alergias");
-        
-        ArrayList<MAlergia> res = gsonBuilder.create().fromJson(RestConn.getRestResponse(url.toString(), null), MAlergia.LIST_TYPE);
-        return res != null ? res : new ArrayList<MAlergia>();
+        return Cumulus.getAlergias();
     }
 
 }

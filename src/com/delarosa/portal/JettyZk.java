@@ -31,7 +31,7 @@ public class JettyZk {
             Server server = new Server(PORT);
             
             SslContextFactory sslcontext = new SslContextFactory();
-            sslcontext.setKeyStorePath("keystore");
+            sslcontext.setKeyStorePath("/home/dsolano/ZkPortal/src/com/delarosa/portal/keystore");
             sslcontext.setKeyStorePassword("OBF:1w1c1svw1u9d1yf21t331yf41ua51sw21w26");
             ServerConnector connector = new ServerConnector(server, sslcontext);
             connector.setPort(SSL_PORT);
@@ -41,11 +41,11 @@ public class JettyZk {
             HandlerCollection handlers = new HandlerCollection();
             // Creating the first web application context
             WebAppContext webcontext = new WebAppContext();
-            webcontext.setResourceBase("web");
-            webcontext.setDefaultsDescriptor("webdefault.xml");
+            webcontext.setResourceBase("/home/dsolano/ZkPortal/src/com/delarosa/portal/web");
+            webcontext.setDefaultsDescriptor("/home/dsolano/ZkPortal/src/com/delarosa/portal/webdefault.xml");
 
             ResourceHandler handler = new ResourceHandler();
-            handler.setResourceBase("web/staticfiles/");
+            handler.setResourceBase("/home/dsolano/ZkPortal/src/com/delarosa/portal/web/staticfiles/");
 
             handlers.addHandler(handler);
             handlers.addHandler(webcontext);

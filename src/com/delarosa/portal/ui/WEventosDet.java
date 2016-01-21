@@ -12,6 +12,7 @@ import com.delarosa.portal.db.entity.MDiagnostico;
 import com.delarosa.portal.db.entity.MIntervencion;
 import com.delarosa.portal.db.entity.MReceta;
 import com.delarosa.portal.db.entity.MToma;
+import com.delarosa.portal.utils.Cumulus;
 import com.delarosa.portal.utils.RestConn;
 import com.delarosa.portal.zk.DetWindow;
 import com.delarosa.portal.zk.Listhead;
@@ -137,16 +138,9 @@ class WEventosDet extends DetWindow {
 
     @Override
     public ArrayList<Collection<?>> getResults(String id) {
-        StringBuilder url = new StringBuilder();
-        url.append("pacientes/");
-        url.append(TokenAuthenticationService.getCurp());
-        url.append("/eventos/");
-        url.append(id);
-        
         ArrayList<Collection<?>> res = new ArrayList<>();
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        MEventoDet info = gsonBuilder.create().fromJson(RestConn.getRestResponse(url.toString(), null), MEventoDet.class);
-        
+        MEventoDet info = Cumulus.getEventosDet(id);
+                
         res.add(info.getTomas());
         res.add(info.getRecetas());
         res.add(info.getCuestionarios());

@@ -1,6 +1,8 @@
 package com.delarosa.portal.ui;
 
 import com.delarosa.portal.authentication.TokenAuthenticationService;
+import com.delarosa.portal.db.entity.MResultado;
+import com.delarosa.portal.utils.Cumulus;
 import com.delarosa.portal.utils.RestConn;
 import com.delarosa.portal.zk.GridLayout;
 import com.delarosa.portal.zk.Listhead;
@@ -53,7 +55,7 @@ public class WBusqueda extends SearchWindow {
 
     @Override
     public ListitemRenderer<?> getItemRenderer() {
-        return (Listitem lstm, Result t, int i) -> {
+        return (Listitem lstm, MResultado t, int i) -> {
             Timestamp date = t.getFecha();
 
             if (date == null) {
@@ -103,59 +105,15 @@ public class WBusqueda extends SearchWindow {
      * @return
      */
     @Override
-    public Collection<Result> getResults() {
-        List<Result> list = new ArrayList<>();
-
+    public Collection<MResultado> getResults() {
+        List<MResultado> list = new ArrayList<>();
         if (textbox != null) {
             if (StringUtils.isNoneBlank(textbox.getText())) {
-                GsonBuilder gsonBuilder = new GsonBuilder();
-                StringBuilder url = new StringBuilder();
-                url.append("pacientes/");
-                url.append(TokenAuthenticationService.getCurp());
-                url.append("/busqueda");
-                List<NameValuePair> params = new ArrayList<>();
-                params.add(new BasicNameValuePair("query", textbox.getText()));
-                list = gsonBuilder.create().fromJson(RestConn.postRestResponse(url.toString(), params), Result.LIST_TYPE);
-              
+                list = Cumulus.getBusqueda(textbox.getText());
             }
         }
 
         return list != null ? list : new ArrayList<>();
-    }
-
-    private static class Result {
-
-        private String tipo;
-        private String highlight;
-        private Timestamp fecha;
-
-        public Timestamp getFecha() {
-            return fecha;
-        }
-
-        public void setFecha(Timestamp fecha) {
-            this.fecha = fecha;
-        }
-
-        public String getTipo() {
-            return tipo;
-        }
-
-        public void setTipo(String tipo) {
-            this.tipo = tipo;
-        }
-
-        public String getHighlight() {
-            return highlight;
-        }
-
-        public void setHighlight(String highlight) {
-            this.highlight = highlight;
-        }
-        
-        public static final Type LIST_TYPE = new TypeToken<ArrayList<Result>>() {
-        }.getType();
-
     }
 
 }

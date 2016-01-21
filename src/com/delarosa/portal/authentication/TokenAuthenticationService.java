@@ -77,7 +77,6 @@ public class TokenAuthenticationService implements AuthenticationService, Serial
         Session sess = Sessions.getCurrent();
         sess.setAttribute("token", tok);
         
-
         return true;
     }
 

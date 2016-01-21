@@ -2,6 +2,7 @@ package com.delarosa.portal.ui;
 
 import com.delarosa.portal.authentication.TokenAuthenticationService;
 import com.delarosa.portal.db.entity.MEvento;
+import com.delarosa.portal.utils.Cumulus;
 import com.delarosa.portal.utils.RestConn;
 import com.delarosa.portal.zk.DateRange;
 import com.delarosa.portal.zk.GridLayout;
@@ -89,8 +90,8 @@ public class WEventos extends SearchWindow {
         listhead.newHeader("ID", "id").setWidth("45px");
         listhead.newHeader("Fecha Inicio", "fechaInicio").setHflex("min");
         listhead.newHeader("Fecha Fin", "fechaFin").setHflex("min");
-        listhead.newHeader("Nombre Medico", "medico").setHflex("min");
-        listhead.newHeader("Cedula", "cedula").setHflex("min");
+        listhead.newHeader("Nombre Médico", "medico").setHflex("min");
+        listhead.newHeader("Cédula", "cedula").setHflex("min");
         listhead.newHeader("Especialidad", "especialidad").setHflex("min");
         listhead.newHeader("Tipo", "tipo").setHflex("min");
         listhead.newHeader("Motivo", "motivo").setHflex("max");
@@ -99,20 +100,13 @@ public class WEventos extends SearchWindow {
 
     @Override
     public Collection<?> getResults() {
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        StringBuilder url = new StringBuilder();
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("desde_fechaInicio", fechaIni.getDate().toString()));
         params.add(new BasicNameValuePair("hasta_fechaInicio", fechaIni.getDate2().toString()));
         params.add(new BasicNameValuePair("desde_fechaFin", fechaFin.getDate().toString()));
         params.add(new BasicNameValuePair("hasta_fechaFin", fechaFin.getDate2().toString()));
-                
-        url.append("pacientes/");
-        url.append(TokenAuthenticationService.getCurp());
-        url.append("/eventos");
-        List<MEvento> eventos = gsonBuilder.create().fromJson(RestConn.getRestResponse(url.toString(), params), MEvento.LIST_TYPE);
-
-        return eventos != null? eventos : new ArrayList<>();
+        
+        return Cumulus.getEventos(params);
    }
 
     public HashMap<String, Object> saveParams() {
