@@ -64,34 +64,46 @@ class WEventosDet extends DetGridWindow {
         
         ListitemRenderer<MToma> toma = (Listitem lstm, MToma t, int i) -> {
             lstm.appendChild(new Listcell(Index.SDF.format(t.getFecha())));
-            lstm.addEventListener(Events.ON_CLICK, (final Event event) -> {
+            Listcell info = new Listcell();
+            info.setIconSclass("z-icon-info-circle  fa-2x");
+            info.addEventListener(Events.ON_CLICK, (final Event event) -> {
                 open(new WSignosEvento(t.getSignos(), id, params));
             });
+            lstm.appendChild(info);
         };
         renders.add(toma);
                  
         ListitemRenderer<MReceta> receta = (Listitem lstm, MReceta t, int i) -> {
             lstm.appendChild(new Listcell(Index.SDF.format(t.getFecha())));
             lstm.appendChild(new Listcell(t.getNotas()));
-            lstm.addEventListener(Events.ON_CLICK, (final Event event) -> {
+            Listcell info = new Listcell();
+            info.setIconSclass("z-icon-info-circle  fa-2x");
+            info.addEventListener(Events.ON_CLICK, (final Event event) -> {
                 open(new WMedicamentosEvento(t.getMedicamentos(), id, params));
             });
+            lstm.appendChild(info);
+
         };
         renders.add(receta);
         
         ListitemRenderer<MCuestionario> cuest = (Listitem lstm, MCuestionario t, int i) -> {
             lstm.appendChild(new Listcell(Index.SDF.format(t.getFecha())));
             lstm.appendChild(new Listcell(t.getTitulo()));
-            lstm.addEventListener(Events.ON_CLICK, (final Event event) -> {
+            Listcell info = new Listcell();
+            info.setIconSclass("z-icon-info-circle  fa-2x");
+            info.addEventListener(Events.ON_CLICK, (final Event event) -> {
                  open(new WPreguntasEvento(t.getPreguntas(), id, params));
              });
+            lstm.appendChild(info);
          };
         renders.add(cuest);
         
         ListitemRenderer<MAdjunto> adjunto = (Listitem lstm, MAdjunto t, int i) -> {
             lstm.appendChild(new Listcell(Index.SDF.format(t.getCreado())));
             lstm.appendChild(new Listcell(t.getNombre()));
-            lstm.addEventListener(Events.ON_CLICK, (final Event event) -> {
+            Listcell download = new Listcell();
+            download.setIconSclass("z-icon-download fa-2x");
+            download.addEventListener(Events.ON_CLICK, (final Event event) -> {
                 RestConn con = new RestConn();
                 byte[] data = con.getServletAttatchment(t.getUuid());
                 if(data != null){
@@ -100,6 +112,7 @@ class WEventosDet extends DetGridWindow {
                     Notification.showWarning("No se encontro el archivo");
                 }
             });
+            lstm.appendChild(download);
          };
         renders.add(adjunto);
         
@@ -126,21 +139,25 @@ class WEventosDet extends DetGridWindow {
 
         Listhead tomas = new Listhead();
         tomas.newHeader("Fecha", "fecha").setHflex("max");
+        tomas.newHeader("", "").setHflex("min");
         headers.add(tomas);
         
         Listhead receta = new Listhead();
         receta.newHeader("Fecha", "fecha").setHflex("min");
         receta.newHeader("Notas", "notas").setHflex("max");
+        receta.newHeader("", "").setHflex("min");
         headers.add(receta);
         
         Listhead cuest = new Listhead();
         cuest.newHeader("Fecha", "fecha").setHflex("min");
         cuest.newHeader("Titulo", "titulo").setHflex("max");
+        cuest.newHeader("", "").setHflex("min");
         headers.add(cuest);
         
         Listhead adjunto = new Listhead();
         adjunto.newHeader("Fecha", "creado").setHflex("min");
         adjunto.newHeader("Nombre", "nombre").setHflex("max");
+        adjunto.newHeader("", "descarga").setHflex("min");
         headers.add(adjunto);
         
         Listhead diac = new Listhead();

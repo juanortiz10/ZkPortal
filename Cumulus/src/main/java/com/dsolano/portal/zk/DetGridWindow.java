@@ -27,21 +27,21 @@ public abstract class DetGridWindow extends Window {
     public DetGridWindow(boolean addToolBar, String id) {
         super(addToolBar);
       
-        Toolbarbutton refresh = new Toolbarbutton(null);
+       // Toolbarbutton refresh = new Toolbarbutton(null);
         Toolbarbutton back = new Toolbarbutton(null);
 
-        refresh.setIconSclass("z-icon-refresh fa-2x");
+   //     refresh.setIconSclass("z-icon-refresh fa-2x");
         back.setIconSclass("z-icon-arrow-circle-o-left fa-2x");
         
-        refresh.addEventListener(Events.ON_CLICK, (Event t) -> {
-            refresh(id);
-        });
+        //refresh.addEventListener(Events.ON_CLICK, (Event t) -> {
+          //  refresh(id);
+        //});
         
         back.addEventListener(Events.ON_CLICK, (Event t) -> {
             back();
         });
         
-        getToolbar().appendChild(refresh);
+        //getToolbar().appendChild(refresh);
         getToolbar().appendChild(back);
 
         refresh(id);

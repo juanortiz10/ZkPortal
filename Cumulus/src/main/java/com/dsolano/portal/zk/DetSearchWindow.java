@@ -23,21 +23,21 @@ public abstract class DetSearchWindow extends Window {
         super(addToolBar);
         this.results = results;
         
-        Toolbarbutton refresh = new Toolbarbutton(null);
+      //  Toolbarbutton refresh = new Toolbarbutton(null);
         Toolbarbutton back = new Toolbarbutton(null);
 
-        refresh.setIconSclass("z-icon-refresh fa-2x");
+     //   refresh.setIconSclass("z-icon-refresh fa-2x");
         back.setIconSclass("z-icon-arrow-circle-o-left fa-2x");
         
-        refresh.addEventListener(Events.ON_CLICK, (Event t) -> {
-            refresh();
-        });
+     //   refresh.addEventListener(Events.ON_CLICK, (Event t) -> {
+     //       refresh();
+      //  });
         
         back.addEventListener(Events.ON_CLICK, (Event t) -> {
             back();
         });
         
-        getToolbar().appendChild(refresh);
+     //   getToolbar().appendChild(refresh);
         getToolbar().appendChild(back);
 
 
